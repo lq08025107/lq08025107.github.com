@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2016-01-24T06:07:16.744Z</updated>
+  <updated>2016-02-22T13:19:24.591Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Article]]></title>
+    <link href="http://yoursite.com/2016/02/22/Article/"/>
+    <id>http://yoursite.com/2016/02/22/Article/</id>
+    <published>2016-02-22T12:18:05.000Z</published>
+    <updated>2016-02-22T13:19:24.591Z</updated>
+    <content type="html"><![CDATA[<p>##This is my very first markdown text</p>
+<h2 id="This_is_my_very_first_markdown_text"><a href="#This_is_my_very_first_markdown_text" class="headerlink" title="This is my very first markdown text"></a>This is my very first markdown text</h2><blockquote>
+<p>This is my first markdown text</p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[This is a test for HEXO]]>
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[liuqiang's first blog for teset]]></title>
+    <link href="http://yoursite.com/2016/01/24/liuqiang-s-first-blog-for-teset/"/>
+    <id>http://yoursite.com/2016/01/24/liuqiang-s-first-blog-for-teset/</id>
+    <published>2016-01-24T14:39:39.000Z</published>
+    <updated>2016-01-24T14:39:39.292Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Hello World]]></title>
