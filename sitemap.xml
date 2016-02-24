@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/02/24/RPC-Remote-Procedure-Call-Protocol/</loc>
+    <lastmod>2016-02-24T15:31:00.602Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/02/22/Hello-World/</loc>
     <lastmod>2016-02-22T14:23:09.127Z</lastmod>
   </url>

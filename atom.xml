@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2016-02-22T14:23:09.127Z</updated>
+  <updated>2016-02-24T15:31:00.602Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[RPC(Remote Procedure Call Protocol)]]></title>
+    <link href="http://yoursite.com/2016/02/24/RPC-Remote-Procedure-Call-Protocol/"/>
+    <id>http://yoursite.com/2016/02/24/RPC-Remote-Procedure-Call-Protocol/</id>
+    <published>2016-02-24T14:19:56.000Z</published>
+    <updated>2016-02-24T15:31:00.602Z</updated>
+    <content type="html"><![CDATA[<p>#1.定义<br>RPC:Remote Procedure Call protocol,远程过程调用协议，通俗来讲即两台服务器A，B，一个应用部署在A服务器上，想要调用B服务器上应用提供的函数/方法，由于不在一个内存空间，不能直接调用，需要通过网络来表达调用的语义和传达调用的数据。</p>
+<p>#2.要解决的问题<br>正如定义所述，RPC从本质上来讲，只是一种网络通信，由于互联网的高速发展，同一台机器之间需要进行进程之间的通信，然后不同机器之间的进程也需要通信，RPC要解决的问题就是这个，RPC是分布式、集群的基础吧。<br><a id="more"></a></p>
+<p>#3.如何实现<br>引用如下的图，来说明RPC的实现原理<br><img src="http://7xr558.com1.z0.glb.clouddn.com/45366c44f775abfd0ac3b43bccc1abc3_r.jpg" alt="PicMissing"><br>从分层的角度来看，个人觉得RPC涉及到了应用层和传输层，这个图例一眼就能看懂，无需多言，如果要自己实现一个这样的框架，应该考虑哪些问题呢？</p>
+<p>(A)在Server和Client之间建立TCP通信连接，可以是按需连接，也可以是长连接。</p>
+<p>(B)Client如何找到Server，既然是通信，总需要一些向IP、Port之类的东西，还有与Server端的哪个进程的哪个方法通信等问题。</p>
+<p>(C)方法的参数传递方式，Client需要把所谓的实参通过网络传递给Server端，就要涉及将内存中的值序列化成二进制的值。</p>
+<p>(D)Server收到后需要进行反序列化，然后进行本地调用，得到返回值。</p>
+<p>(E)Server将返回值序列化成二进制序列传输给Client，Client进行反序列化即可。</p>
+<p>#4.框架<br>RPC只是一个概念，当然有很多组织和企业用自己的方法实现，实现出来的结果就是所谓的框架，搜索了一下，主要有CORBA(Common Object Request Broker Architecture,通用对象请求代理体系结构)、JAVA RMI(Remote Method Invocation,远程方法调用)和Thrift(FB开源框架)等等。</p>
+<p>#5.实现<br>在4.框架中提到了Java的RPC，即RMI，由于我也是Java新手，所以就大体找了个HelloWorld试了试，转自<a href="http://lavasoft.blog.51cto.com/62575/91679/" target="_blank" rel="external">熔岩</a>,代码如下：<br>首先定义接口：IHello<br><code>Java</code></p>
+<pre><code>
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+public interface IHello extends Remote{
+    public String helloWorld() throws RemoteException;
+    public String sayHelloToSomeBody(String someBodyName) throws RemoteException;
+}
+</code></pre>
+
+<p>然后是服务器端的实现HelloImpl<br><code>Java</code></p>
+<pre><code>
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+public class HelloImpl extends UnicastRemoteObject implements IHello{
+    public HelloImpl() throws RemoteException{}
+    public String helloWorld() throws RemoteException{
+        return "HelloWorld!";
+    }
+    public String sayHelloToSomeBody(String someBodyName) throws RemoteException{
+        return "Hello "+someBodyName+"!";
+    } 
+}
+</code></pre>
+
+<p>然后是服务器端的HelloServer<br><code>Java</code></p>
+<p><pre><code><br>import java.rmi.Remote;<br>import java.rmi.Naming;<br>import java.rmi.RemoteException;<br>import java.rmi.AlreadyBoundException;<br>import java.rmi.registry.LocateRegistry;<br>import java.rmi.registry.Registry;<br>import java.net.MalformedURLException;<br>public class HelloServer{<br>    public static void main(String[] args) {<br>        try{<br>            IHello rhello=new HelloImpl();<br>            LocateRegistry.createRegistry(8888);<br>            Naming.bind(“rmi://localhost:8888/RHello”,rhello);<br>            System.out.println(“INFO:Bingding Remote Object IHello Successfully!”);<br>        }<br>        catch(RemoteException e){<br>            System.out.println(“Creating Remote Object Exception”);<br>        }<br>        catch(AlreadyBoundException e){<br>            System.out.println(“AlreadyBoundException”);<br>        }<br>        catch(MalformedURLException e){<br>            System.out.println(“MalformedURLException”);<br>        }<br>    }<br>}<br></code></pre><br>到此可以运行起来Server端，就不上图了，很简单。</p>
+<p>最后是客户端的HelloClient<br><code>Java</code></p>
+<p><pre><code><br>import java.rmi.Remote;<br>import java.rmi.Naming;<br>import java.rmi.RemoteException;<br>import java.rmi.AlreadyBoundException;<br>import java.rmi.registry.LocateRegistry;<br>import java.rmi.registry.Registry;<br>import java.net.MalformedURLException;<br>import java.rmi.NotBoundException;<br>public class HelloClient{<br>    public static void main(String args[]){<br>        try{<br>            IHello rhello=(IHello)Naming.lookup(“rmi://localhost:8888/RHello”);<br>            System.out.println(rhello.helloWorld());<br>            System.out.println(rhello.sayHelloToSomeBody(“LiuQiang”));<br>        }<br>        catch(NotBoundException e){<br>            e.printStackTrace();<br>        }<br>        catch(MalformedURLException e){<br>            e.printStackTrace();<br>        }<br>        catch(RemoteException e){<br>            e.printStackTrace();<br>        }<br>    }<br>}<br></code></pre><br>最后上一张图：<br><img src="http://7xr558.com1.z0.glb.clouddn.com/RMIClient.png" alt="PicMissing"><br>打算如果有时间，试试facebook的RPC：Thrift。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>#1.定义<br>RPC:Remote Procedure Call protocol,远程过程调用协议，通俗来讲即两台服务器A，B，一个应用部署在A服务器上，想要调用B服务器上应用提供的函数/方法，由于不在一个内存空间，不能直接调用，需要通过网络来表达调用的语义和传达调用的数据。</p>
+<p>#2.要解决的问题<br>正如定义所述，RPC从本质上来讲，只是一种网络通信，由于互联网的高速发展，同一台机器之间需要进行进程之间的通信，然后不同机器之间的进程也需要通信，RPC要解决的问题就是这个，RPC是分布式、集群的基础吧。<br>]]>
+    
+    </summary>
+    
+      <category term="Server Java" scheme="http://yoursite.com/tags/Server-Java/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Hello World]]></title>
