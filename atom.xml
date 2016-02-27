@@ -3,9 +3,9 @@
   <title><![CDATA[刘强的博客]]></title>
   
   <link href="/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
+  <link href="http://lq08025107.github.io/"/>
   <updated>2016-02-25T12:32:18.563Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://lq08025107.github.io/</id>
   
   <author>
     <name><![CDATA[John Doe]]></name>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[RPC(Remote Procedure Call Protocol)]]></title>
-    <link href="http://yoursite.com/2016/02/24/RPC-Remote-Procedure-Call-Protocol/"/>
-    <id>http://yoursite.com/2016/02/24/RPC-Remote-Procedure-Call-Protocol/</id>
+    <link href="http://lq08025107.github.io/2016/02/24/RPC-Remote-Procedure-Call-Protocol/"/>
+    <id>http://lq08025107.github.io/2016/02/24/RPC-Remote-Procedure-Call-Protocol/</id>
     <published>2016-02-24T14:19:56.000Z</published>
     <updated>2016-02-25T12:32:18.563Z</updated>
     <content type="html"><![CDATA[<h1 id="1-_u5B9A_u4E49"><a href="#1-_u5B9A_u4E49" class="headerlink" title="1.定义"></a>1.定义</h1><p>RPC:Remote Procedure Call protocol,远程过程调用协议，通俗来讲即两台服务器A，B，一个应用部署在A服务器上，想要调用B服务器上应用提供的函数/方法，由于不在一个内存空间，不能直接调用，需要通过网络来表达调用的语义和传达调用的数据。</p>
@@ -42,14 +42,14 @@
     
     </summary>
     
-      <category term="Server Java" scheme="http://yoursite.com/tags/Server-Java/"/>
+      <category term="Server Java" scheme="http://lq08025107.github.io/tags/Server-Java/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Hello World]]></title>
-    <link href="http://yoursite.com/2016/02/22/Hello-World/"/>
-    <id>http://yoursite.com/2016/02/22/Hello-World/</id>
+    <link href="http://lq08025107.github.io/2016/02/22/Hello-World/"/>
+    <id>http://lq08025107.github.io/2016/02/22/Hello-World/</id>
     <published>2016-02-22T13:31:57.000Z</published>
     <updated>2016-02-22T14:23:09.127Z</updated>
     <content type="html"><![CDATA[<p>这是我使用Github+Hexo的第一篇博客，也不管到底是技术博还是生活或者情感博了，也不知道以后会不会继续更新了，但至少我知道有一个地方，在无聊的时候我可以进来发泄一下。</p>
