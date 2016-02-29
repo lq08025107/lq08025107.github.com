@@ -92,20 +92,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Hadoop是Apache基金会研发的分布式系统基础架构，具体项目来源、发展历程随便上网查一查，一堆一堆的。不知道大家注意到没，市面上Hadoop书籍上面都是一只小象，据说是作者儿子的一个毛绒玩具，小孩子的创造力总是无穷的，才能有这么好听的名字，哈哈，开始，其实我研究的并不深，先是停留在原理性和了解性的阶段，并没有涉及代码层次。</p>
-<p>Hadoop的中心思想是利用普通硬件组成集群，来替代性能高、价钱高的服务器，当然到了一个极限的话，价格再高也换不来高性能了，所以Hadoop<br>的出现很有必要。Hadoop主要是要解决两个方面的问题：<strong>存储</strong>、<strong>运算</strong>。这篇文章主要是讲存储系统，即HDFS。</p>
-<p>HDFS(Hadoop Distribute File System，Hadoop分布式文件系统)1.首先是运行在廉价的服务器上 2.需要保存多个副本（默认3个副本），提供容错机制，副本丢失会自动恢复 3.HDFS将文件分割成block，默认大小是64M，然后将block按键值对存储在内存中，若block划分太小，小文件太多的话，内存开销太大，所以HDFS适合处理大数据。</p>
-<p>先给出一幅图，然后对图中进行解释：<br><img src="http://7xr558.com1.z0.glb.clouddn.com/hdfs.png" alt="HDFS"></p>
-<p>NameNode：名字节点，位于HDFS主端，指导从端的DataNode执行底层的I/O任务，是HDFS中最关键的一点，跟踪文件如何被分割成文件块，文件块被存储在哪些DataNode中等信息，监测整体运行是否正常。</p>
-<p>DataNode：数据节点，存储数据，执行MapReduce运算(这个不属于HDFS范畴，不细说)</p>
-<p>Secondary NameNode：不接收或记录HDFS的任何实时变化，仅与NameNode通信，按照时间间隔获取快照。</p>
-<p>HDFS终究也是个文件系统，文件系统最主要还是离不开读写，无论底层怎么复杂，对用户都是透明的，我们可以大体看一下HDFS读文件的流程。<br><img src="http://7xr558.com1.z0.glb.clouddn.com/HDFS%20%E8%AF%BB%E6%96%87%E4%BB%B6.png" alt="HDFS读文件"></p>
-<p>HDFS写文件，以创建新文件并保存为例。<br><img src="http://7xr558.com1.z0.glb.clouddn.com/HDFS%E6%96%B0%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%B9%B6%E4%BF%9D%E5%AD%98.png" alt="HDFS保存"></p>
-
+<p>Hadoop的中心思想是利用普通硬件组成集群，来替代性能高、价钱高的服务器，当然到了一个极限的话，价格再高也换不来高性能了，所以Hadoop<br>的出现很有必要。Hadoop主要是要解决两个方面的问题：<strong>存储</strong>、<strong>运算</strong>。这篇文章主要是讲存储系统，即HDFS。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/29/Hadoop之HDFS/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/02/29/Hadoop之HDFS/" data-id="cil82o15v0004mwmp6dowlyop" class="article-share-link" data-share="baidu" data-title="Hadoop之HDFS">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/02/29/Hadoop之HDFS/" data-id="cil82qc5a00042wmpbokl0scr" class="article-share-link" data-share="baidu" data-title="Hadoop之HDFS">分享到</a>
       
 
       
@@ -155,7 +152,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/02/24/RPC-Remote-Procedure-Call-Protocol/" data-id="cil82o1500000mwmpgbmv4u6n" class="article-share-link" data-share="baidu" data-title="RPC(Remote Procedure Call Protocol)">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/02/24/RPC-Remote-Procedure-Call-Protocol/" data-id="cil82qc4e00002wmpasbbcn3n" class="article-share-link" data-share="baidu" data-title="RPC(Remote Procedure Call Protocol)">分享到</a>
       
 
       
@@ -205,7 +202,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/02/22/Hello-World/" data-id="cil82o15v0003mwmprn2ci2qa" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/02/22/Hello-World/" data-id="cil82qc5a00032wmpp2wqh38x" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
       
 
       
