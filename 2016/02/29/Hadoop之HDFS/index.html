@@ -4,17 +4,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>刘强的博客</title>
+  <title>Hadoop之HDFS | 刘强的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="刘强的博客">
-<meta property="og:url" content="http://lq08025107.github.io/index.html">
+  <meta name="description" content="Hadoop是Apache基金会研发的分布式系统基础架构，具体项目来源、发展历程随便上网查一查，一堆一堆的。不知道大家注意到没，市面上Hadoop书籍上面都是一只小象，据说是作者儿子的一个毛绒玩具，小孩子的创造力总是无穷的，才能有这么好听的名字，哈哈，开始，其实我研究的并不深，先是停留在原理性和了解性的阶段，并没有涉及代码层次。
+Hadoop的中心思想是利用普通硬件组成集群，来替代性能高、价钱高的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop之HDFS">
+<meta property="og:url" content="http://lq08025107.github.io/2016/02/29/Hadoop之HDFS/index.html">
 <meta property="og:site_name" content="刘强的博客">
-<meta property="og:description">
+<meta property="og:description" content="Hadoop是Apache基金会研发的分布式系统基础架构，具体项目来源、发展历程随便上网查一查，一堆一堆的。不知道大家注意到没，市面上Hadoop书籍上面都是一只小象，据说是作者儿子的一个毛绒玩具，小孩子的创造力总是无穷的，才能有这么好听的名字，哈哈，开始，其实我研究的并不深，先是停留在原理性和了解性的阶段，并没有涉及代码层次。
+Hadoop的中心思想是利用普通硬件组成集群，来替代性能高、价钱高的">
+<meta property="og:image" content="http://7xr558.com1.z0.glb.clouddn.com/hdfs.png">
+<meta property="og:image" content="http://7xr558.com1.z0.glb.clouddn.com/HDFS%20%E8%AF%BB%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://7xr558.com1.z0.glb.clouddn.com/HDFS%E6%96%B0%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%B9%B6%E4%BF%9D%E5%AD%98.png">
+<meta property="og:updated_time" content="2016-02-29T14:17:24.862Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刘强的博客">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Hadoop之HDFS">
+<meta name="twitter:description" content="Hadoop是Apache基金会研发的分布式系统基础架构，具体项目来源、发展历程随便上网查一查，一堆一堆的。不知道大家注意到没，市面上Hadoop书籍上面都是一只小象，据说是作者儿子的一个毛绒玩具，小孩子的创造力总是无穷的，才能有这么好听的名字，哈哈，开始，其实我研究的并不深，先是停留在原理性和了解性的阶段，并没有涉及代码层次。
+Hadoop的中心思想是利用普通硬件组成集群，来替代性能高、价钱高的">
   
     <link rel="alternative" href="/atom.xml" title="刘强的博客" type="application/atom+xml">
   
@@ -67,9 +74,7 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-    <article id="post-Hadoop之HDFS" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-Hadoop之HDFS" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/02/29/Hadoop之HDFS/" class="article-date">
   <time datetime="2016-02-29T12:14:01.000Z" itemprop="datePublished">2016-02-29</time>
@@ -82,8 +87,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/29/Hadoop之HDFS/">Hadoop之HDFS</a>
+    <h1 class="article-title" itemprop="name">
+      Hadoop之HDFS
     </h1>
   
 
@@ -118,110 +123,40 @@
     </footer>
   </div>
   
-</article>
-
- 
+    
+<nav id="article-nav">
   
-    <article id="post-RPC-Remote-Procedure-Call-Protocol" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/24/RPC-Remote-Procedure-Call-Protocol/" class="article-date">
-  <time datetime="2016-02-24T14:19:56.000Z" itemprop="datePublished">2016-02-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/24/RPC-Remote-Procedure-Call-Protocol/">RPC(Remote Procedure Call Protocol)</a>
-    </h1>
+    <a href="/2016/02/24/RPC-Remote-Procedure-Call-Protocol/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">RPC(Remote Procedure Call Protocol)</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-_u5B9A_u4E49"><a href="#1-_u5B9A_u4E49" class="headerlink" title="1.定义"></a>1.定义</h1><p>RPC:Remote Procedure Call protocol,远程过程调用协议，通俗来讲即两台服务器A，B，一个应用部署在A服务器上，想要调用B服务器上应用提供的函数/方法，由于不在一个内存空间，不能直接调用，需要通过网络来表达调用的语义和传达调用的数据。</p>
-<h1 id="2-_u8981_u89E3_u51B3_u7684_u95EE_u9898"><a href="#2-_u8981_u89E3_u51B3_u7684_u95EE_u9898" class="headerlink" title="2.要解决的问题"></a>2.要解决的问题</h1><p>正如定义所述，RPC从本质上来讲，只是一种网络通信，由于互联网的高速发展，同一台机器之间需要进行进程之间的通信，然后不同机器之间的进程也需要通信，RPC要解决的问题就是这个，RPC是分布式、集群的基础吧。<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/24/RPC-Remote-Procedure-Call-Protocol/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://lq08025107.github.io/2016/02/24/RPC-Remote-Procedure-Call-Protocol/" data-id="cil82lj230000z0mpotaicirp" class="article-share-link" data-share="baidu" data-title="RPC(Remote Procedure Call Protocol)">分享到</a>
-      
-
-      
-        <a href="http://lq08025107.github.io/2016/02/24/RPC-Remote-Procedure-Call-Protocol/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Server-Java/">Server Java</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
  
-  
-    <article id="post-Hello-World" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/22/Hello-World/" class="article-date">
-  <time datetime="2016-02-22T13:31:57.000Z" itemprop="datePublished">2016-02-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/22/Hello-World/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这是我使用Github+Hexo的第一篇博客，也不管到底是技术博还是生活或者情感博了，也不知道以后会不会继续更新了，但至少我知道有一个地方，在无聊的时候我可以进来发泄一下。</p>
-<p>今天是正月十五，元宵节，这个节日在我家乡那边算一个很隆重的节日了，刚才爸爸和姐姐去溜大街了，想想自己好久没在家过元宵节了。还记得很小很小的时候，我们还在村里住着，元宵节我和姐姐到城里外婆家过十五，两个人可能一共有1块钱，我姐掌管着（小时候我很依靠姐姐），然后走到烤羊肉串旁边，我说：姐姐，我想吃羊肉串。我俩都不知道那到底是什么味道，后来，姐姐花了2毛钱给我买了一串，具体什么味道早已经忘记了，可是这个细节我记了很久很久。<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/22/Hello-World/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://lq08025107.github.io/2016/02/22/Hello-World/" data-id="cil82lj2r0003z0mp7if260aj" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
-      
-
-      
-        <a href="http://lq08025107.github.io/2016/02/22/Hello-World/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
- 
-  
-  
-</section>
+  <section id="comments">
+   <!-- 多说评论框 start -->
+<div id="ds-thread" class="ds-thread" data-thread-key="2016/02/29/Hadoop之HDFS/" data-title="Hadoop之HDFS" data-url="http://lq08025107.github.io/2016/02/29/Hadoop之HDFS/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"datoublog"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+  </section>
+  </section>
       
       <aside id="sidebar">
   
