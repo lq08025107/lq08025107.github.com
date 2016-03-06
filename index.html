@@ -92,80 +92,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="EasyDarwin_u5F00_u6E90_u6D41_u5A92_u4F53_u5E73_u53F0"><a href="#EasyDarwin_u5F00_u6E90_u6D41_u5A92_u4F53_u5E73_u53F0" class="headerlink" title="EasyDarwin开源流媒体平台"></a>EasyDarwin开源流媒体平台</h1><p>本文大部分内容参考<br><a href="/EasyDarwin">http://doc.easydarwin.org/EasyDarwin/README/</a></p>
-<p><strong>EasyDarwin</strong>是由国内开源流媒体团队开发和维护的一款开源流媒体平台框架，从2012年12月创建并发展至今，从原有的单服务的流媒体服务器形式，扩展成现在的云平台架构的开源项目，更好地帮助广大流媒体开发者和创业型企业快速构建流媒体服务平台，更快、更简单地实现最新的移动互联网(安卓、IOS、微信)流媒体直播与点播的需求，尤其是安防行业与互联网行业的衔接。</p>
-<h1 id="EasyDawin_u76EE_u524D_u652F_u6301"><a href="#EasyDawin_u76EE_u524D_u652F_u6301" class="headerlink" title="EasyDawin目前支持"></a>EasyDawin目前支持</h1><p>1.MP4点播回放；</p>
-<p>2.标准RTSP推模式直播(QTSSReflectorModule)；</p>
-<p>3.标准RTSP拉模式直播(EasyRelayModule)；</p>
-<p>4.HLS直播(EasyHLSModule)；</p>
-<p>5.接入EasyDarwin流媒体平台，分布式部署；</p>
-<h1 id="u7F16_u8BD1_u90E8_u7F72_u65B9_u6CD5"><a href="#u7F16_u8BD1_u90E8_u7F72_u65B9_u6CD5" class="headerlink" title="编译部署方法"></a>编译部署方法</h1><p>1.获取EasyDarwin最新版本。</p>
-<p>2.VS下进行项目生成，将相关dll文件拷入文件夹中即可启动服务。</p>
-<p>3.配置easydarwin.xml<br>主要的几个配置项：</p>
-<p><strong>rtsp_port</strong>: EasyDarwin RTSP服务监听的端口；</p>
-<p><strong>movie_folder</strong>:媒体文件存储的路径，包括点播文件、直播切片生成的hls文件；</p>
-<p><strong>http_service_port</strong>:Webservice服务端口;</p>
-<p><strong>hls_output_enabled</strong>：配置QTSSReflectorModule在接收推送的同时，是否同步输出hls；</p>
-<p><strong>HTTP_ROOT_DIR</strong>：配置EasyHLSModule的对外WEB路径；</p>
-<p><strong>local_ip_address</strong>：配置EasyRelayModule对外服务的ip地址，因为可能会有多网卡或者内网映射，所以需要手动配置；</p>
-<p>4.运行EasyDarwin</p>
-<p>【前提】EasyDarwin可执行文件必须与/html/目录在同一层目录中</p>
-<p>Windows版本运行(控制台调试运行)：</p>
-<pre><code>EasyDarwin.exe -c ./easydarwin.xml -d
-</code></pre><p>注：需要把libEasyHLS.dll，libEasyPusher.dll，libEasyRTSPClient.dll，html文件夹和Movies文件夹拷贝到可执行程序的同目录下！</p>
-<p>Windows服务运行：</p>
-<pre><code>cd ./
-set curPath=&quot;%cd%&quot;
-echo service path：%curPath%
-sc create EasyDarwin binPath= &quot;%curPath%\EasyDarwin.exe -c %curPath%\easydarwin.xml&quot; start= auto
-sc failure EasyDarwin reset= 0 actions= restart/0
-net start EasyDarwin
-pause
-</code></pre><p>将这段脚本做成bat，运行，我们就创建了一个叫做EasyDarwin的Windows服务了，通过系统服务（services.msc）可以查看到。 注：Windows不同版本可能稍有差异，建议在命令行运行bat脚本，而不是直接双击运行，这样能看到具体出错原因！</p>
-<p>5.具体使用示例</p>
-<p>MP4点播</p>
-<p>将经过Hint处理过的mp4文件存在movie_folder目录中，访问RTSP地址：</p>
-<pre><code>rtsp:://[ip]:[rtsp_port]/[filename]
-</code></pre><p>使用VLC等播放器即可播放。</p>
-<p>推模式转发</p>
-<p>直接通过标准RTSP/RTP推送流程（ANNOUNCE/SETUP/PLAY/RTP）向EasyDarwin推送音视频数据进行转发和分发，例如rtsp_port配置为8554，那我们可以直接用EasyDarwin EasyPusher或者live555 DarwinInjector向8554端口进行直播推送；</p>
-<p>拉模式转发</p>
-<p>调用接口（用vlc、ffplay、live555等RTSP Client调用）</p>
-<pre><code>RTSP://[ip]:[rtsp_port]/EasyRelayModule?name=[relayName]&amp;url=&quot;[RTSP_URL]&quot;
-</code></pre><p>例如EasyDarwin服务器IP地址是：8.8.8.8，RTSP端口(rtsp_port)：554，IPCamera的RTSP地址是：rtsp://admin:admin@192.168.66.189/22，那么我们可以：</p>
-<p>1、配置easydarwin.xml EasyRelayModule</p>
-<pre><code>&lt;PREF NAME=&quot;local_ip_address&quot; &gt;8.8.8.8&lt;/PREF&gt;
-</code></pre><p>2、请求转发：RTSP://8.8.8.8:554/EasyRelayModule?name=live&amp;url=”rtsp://admin:admin@192.168.66.189/22” （name是定义一个拉模式转发流的唯一标识，不允许重复）</p>
-<p>3、直播URL：RTSP://8.8.8.8:554/EasyRelayModule?name=live</p>
-<p>4、请求停止转发：RTSP://8.8.8.8:554/EasyRelayModule?name=live&amp;cmd=stop （cmd=stop表示停止拉模式转发）</p>
-<p>6.实际操作</p>
-<p>A 使用EasyDarwin+VLC进行MP4点播，效果如下：<br><img src="http://7xr558.com1.z0.glb.clouddn.com/easydarwinmp4.png" alt="MP4点播"></p>
-<p>B 使用EasyPuhser+EasyDarwin+Nginx查看网页直播<br>具体操作详见最上面网址，配置过程一定要知道每一步自己在干什么，配合Nginx+EasyPusher+EasyDarwin，可以实现向服务器推送RTSP流，然后转发到公网进行查看。效果如下：<br><img src="http://7xr558.com1.z0.glb.clouddn.com/HLS.png" alt="HLS"></p>
-<p>7.这一套每个工具的作用<br>EasyDarwin：直播、点播，安防行业与互联网行业对接</p>
-<pre><code>输入：MP4本地文件 RTSP流
-输出：RTSP流 HLS直播
-</code></pre><p>EasyPusher：一个给EasyDarwin推送流媒体音视频的推送库，使EasyDarwin可以进行转发和分发</p>
-<pre><code>EasyPush_FILE：推送本地文件到服务器
-EasyPusher_RTSP：通过EasyRTSPClient库，将RTSP/RTP数据获取到本地，再推送到EasyDarwin
-支持的视频编码有：H264、MJPEG、MPEG4
-支持的音频编码有：AAC、G711 alaw、G711 ulaw
-</code></pre><p>EasyHLS：只需要传入打包的文件名、切片存放的目录、单个切片时长以及切片数等参数，EasyHLS库就能轻松将H264+AAC的流媒体切片成m3u8+ts，提供给WEB服务器进行HLS流媒体发布；</p>
-<pre><code>EasyHLS_RTSP：通过RTSPClient将RTSP URL的流媒体数据获取并进行ts打包，提供HLS直播
-</code></pre><p>EasyRTSPClient：EasyRTSPClient是EasyDarwin开源流媒体团队提供的一套非常稳定、易用、支持重连的RTSPClient工具，接口调用非常简单，再也不用像调用live555那样处理整个RTSP OPTIONS/DESCRIBE/SETUP/PLAY的复杂流程，担心内存释放的问题了！</p>
-<pre><code>拉取RTSP流到本地
-</code></pre><p>EasyClient：客户端项目，支持多种源接入，Windows摄像头、麦克风、RTSP摄像机、屏幕桌面，采集后经过264编码、EasyPuhser推送到流媒体服务器进行转发；还支持通过EasyRTSPClient拉取EasyDarwin直播流，充当VLC的作用。如下图所示：</p>
-<p><img src="http://7xr558.com1.z0.glb.clouddn.com/EasyClient.png" alt="Client"></p>
-<p>总之，这一套解决方案算是全的了，有如下这些（官网截图，我们用的只是其中一小部分）：</p>
-<p><img src="http://7xr558.com1.z0.glb.clouddn.com/EasyDarwin%E7%B3%BB%E5%88%97%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.png" alt="系列解决方案"></p>
-<p>8.科普小知识</p>
-<p>HLS(HTTP Living Streaming):Apple的动态码率自适应技术。主要用于PC和Apple终端的音视频服务。包括一个m3u(8)的索引文件，TS媒体分片文件和key加密串文件。</p>
-<p>RTSP(Real Time Streaming Protocol):实时流传输协议，用于在客户端和服务器之间建立和协商实时流会话。</p>
-<p>有兴趣的可以多研究研究。</p>
-
+<p><strong>EasyDarwin</strong>是由国内开源流媒体团队开发和维护的一款开源流媒体平台框架，从2012年12月创建并发展至今，从原有的单服务的流媒体服务器形式，扩展成现在的云平台架构的开源项目，更好地帮助广大流媒体开发者和创业型企业快速构建流媒体服务平台，更快、更简单地实现最新的移动互联网(安卓、IOS、微信)流媒体直播与点播的需求，尤其是安防行业与互联网行业的衔接。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/03/06/EasyDarwin入门实践/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/03/06/EasyDarwin入门实践/" data-id="cilg573or0009xsmpcyj99kd0" class="article-share-link" data-share="baidu" data-title="EasyDarwin入门实践">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/03/06/EasyDarwin入门实践/" data-id="cilg58vzj000928mpylhabvte" class="article-share-link" data-share="baidu" data-title="EasyDarwin入门实践">分享到</a>
       
 
       
@@ -215,7 +152,7 @@ EasyPusher_RTSP：通过EasyRTSPClient库，将RTSP/RTP数据获取到本地，�
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/02/29/Hadoop之HDFS/" data-id="cilg573or0006xsmphb18mgbh" class="article-share-link" data-share="baidu" data-title="Hadoop之HDFS">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/02/29/Hadoop之HDFS/" data-id="cilg58vzj000628mp0moorx93" class="article-share-link" data-share="baidu" data-title="Hadoop之HDFS">分享到</a>
       
 
       
@@ -265,7 +202,7 @@ EasyPusher_RTSP：通过EasyRTSPClient库，将RTSP/RTP数据获取到本地，�
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/02/24/RPC-Remote-Procedure-Call-Protocol/" data-id="cilg573nw0000xsmpj85f92tt" class="article-share-link" data-share="baidu" data-title="RPC(Remote Procedure Call Protocol)">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/02/24/RPC-Remote-Procedure-Call-Protocol/" data-id="cilg58vyn000028mp4ormvamh" class="article-share-link" data-share="baidu" data-title="RPC(Remote Procedure Call Protocol)">分享到</a>
       
 
       
@@ -315,7 +252,7 @@ EasyPusher_RTSP：通过EasyRTSPClient库，将RTSP/RTP数据获取到本地，�
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/02/22/Hello-World/" data-id="cilg573ob0003xsmpz1brn6gy" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/02/22/Hello-World/" data-id="cilg58vzj000328mpsm7dfjsv" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
       
 
       
