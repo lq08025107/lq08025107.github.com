@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[刘强的博客]]></title>
-  
+  <subtitle><![CDATA[Watch and Learn]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lq08025107.github.io/"/>
   <updated>2016-03-06T05:54:01.729Z</updated>
