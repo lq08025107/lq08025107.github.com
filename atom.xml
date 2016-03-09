@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Watch and Learn]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lq08025107.github.io/"/>
-  <updated>2016-03-06T05:54:01.729Z</updated>
+  <updated>2016-03-09T12:19:42.000Z</updated>
   <id>http://lq08025107.github.io/</id>
   
   <author>
@@ -13,6 +13,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[三月所感]]></title>
+    <link href="http://lq08025107.github.io/2016/03/09/%E4%B8%89%E6%9C%88%E6%89%80%E6%84%9F/"/>
+    <id>http://lq08025107.github.io/2016/03/09/三月所感/</id>
+    <published>2016-03-09T11:51:37.000Z</published>
+    <updated>2016-03-09T12:19:42.000Z</updated>
+    <content type="html"><![CDATA[<p>这段日子比较忙，乱七八糟的事情，今天觉得还是瞎写写，有关生活的。</p>
+<p>1.关于强行开博的问题。这个是我之前在知乎看到的一个问题，原帖内容是<strong>“你们周围有在github，博客上很活跃，但工作收入并不是很好的码农吗？”</strong>原帖链接如下：<br><a id="more"></a></p>
+<p><a href="http://www.zhihu.com/question/32247845" title="你们周围有在github，博客上很活跃，但工作收入并不是很好的码农吗？" target="_blank" rel="external">http://www.zhihu.com/question/32247845</a></p>
+<p>很多大神们都各抒己见，也有提到关于强行开博的问题，我就说说自己的感受，就拿我来说,</p>
+<p>A.我之前也写的，我开博客，不一定完全是技术博，我这不也在写关于生活嘛，有时候记录一下生活感觉也是蛮好的。</p>
+<p>B.博客的确很浪费时间。开了博客之后才注意到，写博客的确挺浪费时间的，前几篇本来脑子里还有点东西，可是那天写到了挺晚，然后舍友睡了，我这啪啦啪啦的敲键盘也不好，就匆匆结尾了。</p>
+<p>C.博客的技术含量问题。这个其实是我最看重的问题，现在基本每个人都有个技术博，很多人写的都没什么技术含量，篇数倒是挺多，包括我自己在内，我的很多博客也是参考各种资料，技术含量基本为0，也只能给刚接触的人提供个参考。<strong>我的理解是：</strong>我完全拿博客当个日记了，复杂点的日记，记录自己学习的过程，也没期望有人看，别人看了我还会觉得会不会耽误人家的时间，所以也会尽量提高博客的含金量，尽力就好，毕竟这个社会冗余信息这么多，互联网上的信息也不在乎多我这么一点点，呵呵，有点无耻了。</p>
+<p>2.前段时间忙着浏览各种J2EE和分布式技术，大约有JSP、Servlet、JavaBean、Struts2、Hibernate，RPC、Zookeeper，花了一俩周时间吧，的确了解到了不少，但是都没有深入，特别感谢<strong>王昊</strong>的指导，等再深入点、有时间的时候写一下，记录之。这俩天也算有点瓶颈了，还在努力突破，希望自己能在这条路上走的远一点吧，我还是对这些有些兴趣的。</p>
+<p>3.今天<strong>户口</strong>下来了。我明白在帝都一个户口的重要性，也知道为了这个户口我所牺牲的东西，一步一步走到了今天，也不知道怎么形容了，不能说有悲，也不能说有喜，日子可能本身就这样吧。</p>
+<p>今天就写这么多了，辅导一下二潇这个傻孩子。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>这段日子比较忙，乱七八糟的事情，今天觉得还是瞎写写，有关生活的。</p>
+<p>1.关于强行开博的问题。这个是我之前在知乎看到的一个问题，原帖内容是<strong>“你们周围有在github，博客上很活跃，但工作收入并不是很好的码农吗？”</strong>原帖链接如下：<br>]]>
+    
+    </summary>
+    
+      <category term="生活" scheme="http://lq08025107.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[EasyDarwin入门实践]]></title>
