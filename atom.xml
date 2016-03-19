@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Watch and Learn]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lq08025107.github.io/"/>
-  <updated>2016-03-09T14:25:26.411Z</updated>
+  <updated>2016-03-19T14:39:01.524Z</updated>
   <id>http://lq08025107.github.io/</id>
   
   <author>
@@ -13,6 +13,23 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Sad]]></title>
+    <link href="http://lq08025107.github.io/2016/03/19/Sad/"/>
+    <id>http://lq08025107.github.io/2016/03/19/Sad/</id>
+    <published>2016-03-19T14:38:10.000Z</published>
+    <updated>2016-03-19T14:39:01.524Z</updated>
+    <content type="html"><![CDATA[<p>以后再也见不到奶奶了。。。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>以后再也见不到奶奶了。。。</p>
+]]>
+    </summary>
+    
+      <category term="生活" scheme="http://lq08025107.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[What is exactly RESRful programming]]></title>
