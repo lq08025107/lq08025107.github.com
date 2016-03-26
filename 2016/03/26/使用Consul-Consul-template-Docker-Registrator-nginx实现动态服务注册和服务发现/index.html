@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现 | 刘强的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="写在最前面：本文尝试使用Docker、Registrator、Consul、Consul-template和Nginx实现可扩展的、支持服务注册、服务发现的架构。本文不涉及这些软件的具体实现方法，是对其功能进行探索。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现">
+<meta property="og:url" content="http://lq08025107.github.io/2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/index.html">
+<meta property="og:site_name" content="刘强的博客">
+<meta property="og:description" content="写在最前面：本文尝试使用Docker、Registrator、Consul、Consul-template和Nginx实现可扩展的、支持服务注册、服务发现的架构。本文不涉及这些软件的具体实现方法，是对其功能进行探索。">
+<meta property="og:image" content="http://7xr558.com1.z0.glb.clouddn.com/Service_Discovery.png">
+<meta property="og:updated_time" content="2016-03-26T09:27:21.164Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现">
+<meta name="twitter:description" content="写在最前面：本文尝试使用Docker、Registrator、Consul、Consul-template和Nginx实现可扩展的、支持服务注册、服务发现的架构。本文不涉及这些软件的具体实现方法，是对其功能进行探索。">
+  
+    <link rel="alternative" href="/atom.xml" title="刘强的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">刘强的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Watch and Learn</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="lq08025107.github.io">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/" class="article-date">
+  <time datetime="2016-03-26T09:26:12.000Z" itemprop="datePublished">2016-03-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>写在最前面</strong>：本文尝试使用Docker、Registrator、Consul、Consul-template和Nginx实现可扩展的、支持服务注册、服务发现的架构。本文不涉及这些软件的具体实现方法，是对其功能进行探索。<br><a id="more"></a></p>
+<p>#概述<br><strong>Docker</strong>，容器(Container)技术近年来为什么会兴起？我的理解是因为整个世界都是网络了，既然有网络应用的消费者，那必须就有网络应用的生产者，容器技术就是生产者为了解脱自己的痛苦而创造的一个东西，背后的思想是创建软件程序可移植的轻量容器。通俗地讲，开发者在开发环境中开发自己的应用，要部署到实际生产线是一件非常复杂的事情，docker的出现，使得开发者一切操作都在docker中进行，把docker搬到生产环境中即可使用，非常方便。<em>软件的出现的目的总是让使用者更加方便</em>，所以学习一下docker还是会给你一种新的启发。</p>
+<p><strong>Consul</strong>，Consul是HahsiCorp开发的一个服务发现与配置的项目，Consul实质上以KV形式保存数据，你可以理解Consul就是你的<strong>服务管家</strong>，这个管家不止可以创建Cluster，还有良好的Web界面，值得推荐。这时不得不提到另一个大名鼎鼎的动物园管家，Zookeeper，在公司实际项目中，zk来做服务的发现注册已经有一套方案，本文的方法算是另一条路吧，不存在好坏之分。</p>
+<p>Consul-template，他在监控着Consul，当其发现其中的服务项有变化时，更新文件并执行操作。譬如本文中要做的，更新nginx配置文件，并对nginx进行<strong>优雅</strong>地重启。</p>
+<p><strong>Registrator</strong>，原名叫Docksul，看名字就知道，他和docker分不开，本文非要引入docker的原因也是因为他，他是一个为docker而设计的服务注册项目，他监听跨主机运行的容器的启动和停止，检查并向Consul注册。其实本文中其他的项目都可以单独在宿主机上运行，只是这个Registrator不行，所以最后的方案还是经过考虑再选择，毕竟学习docker也是需要一定的成本的。</p>
+<p><strong>Nginx</strong>，这个软件就不用介绍了，大名鼎鼎，做静态文件服务器、反向代理、路由选择、负载均衡，支持极高并发，主流是nginx+tomcat?这个我不太清楚业界主流是Nginx加什么。多嘴一句，如果有兴趣阅读Nginx源码，要找到合适的方法，个人觉得还是彻底先了解功能后再进行源码阅读会比较好。</p>
+<p>#大体思路<br>1.启动Consul，Consul直接在宿主机上运行可以，在容器中运行也可以，看需求，本文后面的实际操作中，将Consul放到了Docker中。</p>
+<p>2.Service A、Service B、Service C在启动时向Consul中注册自己，其他服务启动时也主动向Consul注册。</p>
+<p>3.运行Consul template，正如概述中讲的，本文中template的作用就是更新Nginx配置文件并重启Nginx，我原本想这些组件都在Docker中运行，但是奈何我国国情，我真的pull不下来Consul template，所以就只能在宿主机上运行了。<strong>FUCK the GFW！</strong></p>
+<p>4.Nginx，做负载均衡，要起得作用是动态的把网络消费者的请求转发到后台的Docker中。</p>
+<p>大体流程图如下，配合着上述大体思路，我觉得应该能看懂了。<br><img src="http://7xr558.com1.z0.glb.clouddn.com/Service_Discovery.png" alt="Servive Discovery"></p>
+<p>#实际操作<br>实验环境：Ubuntu 14.04 <strong>64位</strong>，Docker官方强调64位了，也许你32的也能安上，但是pull下的很多东西不能用，比较蛋疼。</p>
+<p>1.docker的安装和使用，自行Google或Bing。</p>
+<p>2.构建一个web服务，此处参考</p>
+<p>web服务器的Dockerfile如下：(注意：python3中好像是http.server)</p>
+<pre><code>FROM python:2.7
+EXPOSE 80
+CMD [&quot;python&quot;,&quot;-m&quot;,&quot;SimpleHTTPServer&quot; ]
+</code></pre><p>在Dockerfile所在的文件夹下执行,创建以个名为simplehttpserver的镜像</p>
+<pre><code>docker build -t simplehttpserver .
+</code></pre><p>利用上面创建的镜像构建容器：</p>
+<pre><code>docker run -it -p 8000:80 simplehttpserver
+</code></pre><p>即可通过浏览器或者<code>curl</code>访问。</p>
+<p>3.docker中运行Consul（此处正式开始操作，第2步只是基础服务，要在系统跑起来之后再注册服务）</p>
+<pre><code>docker run -it -h node -p 8500:8500 -p 8600:53/udp progrium/consul -server -bootstrap -advertise 127.0.0.1 -log-level debug
+</code></pre><p>运行之后，Consul是自带UI界面的，所以通过浏览器可以访问。</p>
+<p>4.docker中运行Registrator</p>
+<pre><code>docker run -d --name=registratror --net=host --volume=/var/run/docker.sock:/tmp/docker.sock gliderlabs/registrator consul://127.0.0.1:8500
+</code></pre><p>5.Host中运行Consul-template</p>
+<pre><code>./consul-template -consul 127.0.0.1:8500 &quot;/etc/nginx/conf.d/test.ctmpl:/etc/nginx/config.d/test.conf:nginx -s reload&quot;
+</code></pre><p>consul-template指定了模板的位置和生成文件的存放位置，然后对nginx进行重启就可以了。</p>
+<p>上述步骤中各个模块的具体参数可以查看help。</p>
+<p>#One more thing…</p>
+<p>这个框架中的关键是Consul,这里用到了Consul的服务注册，个人感觉Consul服务注册有三种方法吧</p>
+<p>A.通过编写配置文件(json)，指定配置文件的存放目录 –config-dir</p>
+<p>B.通过Consul HTTP API，在实际程序中调用，当程序运行起来的时候自动注册</p>
+<p>C.第三方注册，结合Docker使用，使用Registrator这样的工具</p>
+<p>其中的优缺点想必大家也都了解了，通过A是要手动编写json配置文件并向Consul发送一个reload命令，我在想这样做好像不太合适，我们的目的是自动化的实现服务注册，在本文的应用场景下，与其重启Consul，还不如来个<code>nginx -s reload</code>,反正总有一个要重启嘛。B方案目前还没有实践，但可以想到也是会有问题的，在你程序里平白无辜加一段控制代码，谁都不愿意。C方案正是本文的实践方法，可以实现完全动态，但依赖于Docker平台和Registrator组件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://lq08025107.github.io/2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/" data-id="cim8xocsr00004smpo480pucb" class="article-share-link" data-share="baidu" data-title="使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现">分享到</a>
+      
+
+      
+        <a href="http://lq08025107.github.io/2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态服务发现/">动态服务发现</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/19/Sad/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Sad</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+ 
+  <section id="comments">
+   <!-- 多说评论框 start -->
+<div id="ds-thread" class="ds-thread" data-thread-key="2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/" data-title="使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现" data-url="http://lq08025107.github.io/2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"datoublog"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyDarwin/">EasyDarwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop-HDFS/">Hadoop HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/">REST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC-Java/">RPC Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态服务发现/">动态服务发现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/EasyDarwin/" style="font-size: 10px;">EasyDarwin</a> <a href="/tags/Hadoop-HDFS/" style="font-size: 10px;">Hadoop HDFS</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RPC-Java/" style="font-size: 10px;">RPC Java</a> <a href="/tags/动态服务发现/" style="font-size: 10px;">动态服务发现</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/">使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/19/Sad/">Sad</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/What-is-exactly-RESRful-programming/">What is exactly RESRful programming</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/三月所感/">三月所感</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/06/EasyDarwin入门实践/">EasyDarwin入门实践</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://weibo.com/u/1906711175" target="_blank">作者微博</a>
+          </li>
+        
+          <li>
+            <a href="http://iliuqiang.net" target="_blank">lq08025107@163.com</a>
+          </li>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus.</a>
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+    </div>
+  </div>
+
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"lq08025107"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
