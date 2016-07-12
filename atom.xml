@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Watch and Learn]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lq08025107.github.io/"/>
-  <updated>2016-03-26T09:30:26.291Z</updated>
+  <updated>2016-07-12T15:37:34.901Z</updated>
   <id>http://lq08025107.github.io/</id>
   
   <author>
@@ -13,6 +13,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Java volatile 关键字]]></title>
+    <link href="http://lq08025107.github.io/2016/07/12/Java-volatile-%E5%85%B3%E9%94%AE%E5%AD%97/"/>
+    <id>http://lq08025107.github.io/2016/07/12/Java-volatile-关键字/</id>
+    <published>2016-07-12T15:30:59.000Z</published>
+    <updated>2016-07-12T15:37:34.901Z</updated>
+    <content type="html"><![CDATA[<p>看到了一篇特别好的博文，就专门开一贴转载过来，从今天开始慢慢重新开始写博客</p>
+<p><a href="http://www.cnblogs.com/dolphin0520/p/3920373.html" target="_blank" rel="external">Java并发编程：volatile关键字解析</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>看到了一篇特别好的博文，就专门开一贴转载过来，从今天开始慢慢重新开始写博客</p>
+<p><a href="http://www.cnblogs.com/dolphin0520/p/3920373.html" target="_blank" rel="external">J]]>
+    </summary>
+    
+      <category term="Java" scheme="http://lq08025107.github.io/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现]]></title>
@@ -290,6 +308,23 @@ EasyPusher_RTSP：通过EasyRTSPClient库，将RTSP/RTP数据获取到本地，�
     <![CDATA[<p>这是我使用Github+Hexo的第一篇博客，也不管到底是技术博还是生活或者情感博了，也不知道以后会不会继续更新了，但至少我知道有一个地方，在无聊的时候我可以进来发泄一下。</p>
 <p>今天是正月十五，元宵节，这个节日在我家乡那边算一个很隆重的节日了，刚才爸爸和姐姐去溜大街了，想想自己好久没在家过元宵节了。还记得很小很小的时候，我们还在村里住着，元宵节我和姐姐到城里外婆家过十五，两个人可能一共有1块钱，我姐掌管着（小时候我很依靠姐姐），然后走到烤羊肉串旁边，我说：姐姐，我想吃羊肉串。我俩都不知道那到底是什么味道，后来，姐姐花了2毛钱给我买了一串，具体什么味道早已经忘记了，可是这个细节我记了很久很久。<br>]]>
     
+    </summary>
+    
+      <category term="生活" scheme="http://lq08025107.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <link href="http://lq08025107.github.io/2016/02/22/11/"/>
+    <id>http://lq08025107.github.io/2016/02/22/11/</id>
+    <published>2016-02-22T13:31:57.000Z</published>
+    <updated>2016-04-19T14:24:15.267Z</updated>
+    <content type="html"><![CDATA[<p>11</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>11</p>
+]]>
     </summary>
     
       <category term="生活" scheme="http://lq08025107.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
