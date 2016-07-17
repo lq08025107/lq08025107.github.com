@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Watch and Learn]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lq08025107.github.io/"/>
-  <updated>2016-07-17T08:47:12.460Z</updated>
+  <updated>2016-07-17T08:52:16.085Z</updated>
   <id>http://lq08025107.github.io/</id>
   
   <author>
@@ -19,9 +19,9 @@
     <link href="http://lq08025107.github.io/2016/07/17/Java%E4%BB%A3%E7%90%86/"/>
     <id>http://lq08025107.github.io/2016/07/17/Java代理/</id>
     <published>2016-07-17T08:35:48.000Z</published>
-    <updated>2016-07-17T08:47:12.460Z</updated>
+    <updated>2016-07-17T08:52:16.085Z</updated>
     <content type="html"><![CDATA[<h3 id="u5199_u5728_u6700_u524D_u9762"><a href="#u5199_u5728_u6700_u524D_u9762" class="headerlink" title="写在最前面"></a>写在最前面</h3><p>距离上一次写博客不知道经过多久了，有很多原因吧，家里的事占用了一部分心情，然后就是工行的破事，没完没了，最近终于脱身来做一些自己不反感的事情了，身体上累一点也觉得不那么难受</p>
-<h3 id="u4E3B_u9898_uFF1A_u4EE3_u7406"><a href="#u4E3B_u9898_uFF1A_u4EE3_u7406" class="headerlink" title="主题：代理"></a>主题：代理</h3><p>代理这个词在生活中出现的频率可谓不低，上网挂代理、微商代理，其实细想想和编程中的代理是一回事，就拿微商代理来说，真正的产品供货商就是你程序中的业务实体（类、接口），那些成天发朋友圈的讨厌的人就是代理，你是客户端，客户端请求时不与服务提供商直接打交道，而是通过代理。但有一点不同的是，微商代理很讨厌，而编程中的代理很讨人喜欢。当然他们都有共同点，那就是<strong>代理可以帮你做一些额外的事情</strong>。<br>代理模式会隐藏真实的业务主体，从而达到一种封装的效果，这也是面向对象编程的一个基本思想吧。<br><!--More--></p>
+<h3 id="u4E3B_u9898_uFF1A_u4EE3_u7406"><a href="#u4E3B_u9898_uFF1A_u4EE3_u7406" class="headerlink" title="主题：代理"></a>主题：代理</h3><p>代理这个词在生活中出现的频率可谓不低，上网挂代理、微商代理，其实细想想和编程中的代理是一回事，就拿微商代理来说，真正的产品供货商就是你程序中的业务实体（类、接口），那些成天发朋友圈的讨厌的人就是代理，你是客户端，客户端请求时不与服务提供商直接打交道，而是通过代理。但有一点不同的是，微商代理很讨厌，而编程中的代理很讨人喜欢。当然他们都有共同点，那就是<strong>代理可以帮你做一些额外的事情</strong>。<br>代理模式会隐藏真实的业务主体，从而达到一种封装的效果，这也是面向对象编程的一个基本思想吧。<br><a id="more"></a></p>
 <h3 id="u9759_u6001_u4EE3_u7406"><a href="#u9759_u6001_u4EE3_u7406" class="headerlink" title="静态代理"></a>静态代理</h3><p>首先谈一谈静态代理，静态代理是最简单的代理模式。直接上代码：</p>
 <p>业务接口：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IBusiness</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">earnMoney</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -35,7 +35,9 @@
 <p>可以看出，上述动态代理将sell和buy方法剥离了出来，达到了目的，这也是Java动态代理的标准创建流程。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h3 id="u5199_u5728_u6700_u524D_u9762"><a href="#u5199_u5728_u6700_u524D_u9762" class="headerlink" title="写在最前面"></a>写在最前面</h3><p>距离上一次写博客不知]]>
+    <![CDATA[<h3 id="u5199_u5728_u6700_u524D_u9762"><a href="#u5199_u5728_u6700_u524D_u9762" class="headerlink" title="写在最前面"></a>写在最前面</h3><p>距离上一次写博客不知道经过多久了，有很多原因吧，家里的事占用了一部分心情，然后就是工行的破事，没完没了，最近终于脱身来做一些自己不反感的事情了，身体上累一点也觉得不那么难受</p>
+<h3 id="u4E3B_u9898_uFF1A_u4EE3_u7406"><a href="#u4E3B_u9898_uFF1A_u4EE3_u7406" class="headerlink" title="主题：代理"></a>主题：代理</h3><p>代理这个词在生活中出现的频率可谓不低，上网挂代理、微商代理，其实细想想和编程中的代理是一回事，就拿微商代理来说，真正的产品供货商就是你程序中的业务实体（类、接口），那些成天发朋友圈的讨厌的人就是代理，你是客户端，客户端请求时不与服务提供商直接打交道，而是通过代理。但有一点不同的是，微商代理很讨厌，而编程中的代理很讨人喜欢。当然他们都有共同点，那就是<strong>代理可以帮你做一些额外的事情</strong>。<br>代理模式会隐藏真实的业务主体，从而达到一种封装的效果，这也是面向对象编程的一个基本思想吧。<br>]]>
+    
     </summary>
     
       <category term="Java" scheme="http://lq08025107.github.io/tags/Java/"/>
