@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Watch and Learn]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lq08025107.github.io/"/>
-  <updated>2016-11-23T14:47:28.696Z</updated>
+  <updated>2016-11-23T14:49:59.270Z</updated>
   <id>http://lq08025107.github.io/</id>
   
   <author>
@@ -15,14 +15,15 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Awesosme Microservices]]></title>
-    <link href="http://lq08025107.github.io/2016/11/23/Awesosme-Microservices/"/>
-    <id>http://lq08025107.github.io/2016/11/23/Awesosme-Microservices/</id>
+    <title><![CDATA[微服务架构相关技术汇总]]></title>
+    <link href="http://lq08025107.github.io/2016/11/23/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E6%B1%87%E6%80%BB/"/>
+    <id>http://lq08025107.github.io/2016/11/23/微服务架构相关技术汇总/</id>
     <published>2016-11-23T14:44:18.000Z</published>
-    <updated>2016-11-23T14:47:28.696Z</updated>
+    <updated>2016-11-23T14:49:59.270Z</updated>
     <content type="html"><![CDATA[<p><strong>转载</strong></p>
 <p>原地址：<a href="https://github.com/mfornos/awesome-microservices" target="_blank" rel="external">https://github.com/mfornos/awesome-microservices</a></p>
 <p>A curated list of Microservice Architecture related principles and technologies.</p>
+<a id="more"></a>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <p><strong>Table of Contents</strong></p>
@@ -613,7 +614,9 @@
 ]]></content>
     <summary type="html">
     <![CDATA[<p><strong>转载</strong></p>
-<p>原地址：<a href="https://github.com/mfornos/awesome-microservices" target="_blank" rel="external">https://github.c]]>
+<p>原地址：<a href="https://github.com/mfornos/awesome-microservices">https://github.com/mfornos/awesome-microservices</a></p>
+<p>A curated list of Microservice Architecture related principles and technologies.</p>]]>
+    
     </summary>
     
       <category term="微服务" scheme="http://lq08025107.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
