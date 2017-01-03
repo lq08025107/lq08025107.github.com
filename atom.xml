@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Watch and Learn]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lq08025107.github.io/"/>
-  <updated>2016-11-23T14:49:59.270Z</updated>
+  <updated>2017-01-03T01:22:36.162Z</updated>
   <id>http://lq08025107.github.io/</id>
   
   <author>
@@ -13,6 +13,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[2016和2017]]></title>
+    <link href="http://lq08025107.github.io/2017/01/03/2016%E5%92%8C2017/"/>
+    <id>http://lq08025107.github.io/2017/01/03/2016和2017/</id>
+    <published>2017-01-03T01:22:02.000Z</published>
+    <updated>2017-01-03T01:22:36.162Z</updated>
+    <content type="html"><![CDATA[<p>2016年过去了，今天是2017年第一个工作日，2017年1月3日。</p>
+<p>新年是回家过得，跟爸妈姐姐很开心，体会到家人身体健康开心快乐才是最重要的。谢谢你们。</p>
+<p>以年度总结的角度去想2016，想到哪里写到哪里：</p>
+<ol>
+<li>前半年纯属浪费时光，没有收获，却失去了奶奶。</li>
+<li>后半年从0开始走入后端，逐渐入门。</li>
+<li>目前了解主流技术路线，了解互联网后端的大体架构。</li>
+<li>内功不足，基础薄弱，没有对一些框架进行思考和深入研究，仅仅停留在会用阶段。</li>
+</ol>
+<p>2017年，期望：</p>
+<ol>
+<li>加强内功修炼，着重Java和JS</li>
+<li>跟紧潮流，熟悉新的框架</li>
+<li>根据自己脑中idea，慢慢着手自己动手写框架</li>
+<li>有机会的话，熟悉安卓。</li>
+</ol>
+<p>2016和2017关键字：</p>
+<p>奶奶 姐姐宝宝 RPC dubbox REST docker swarm netty Elasticsearch 微服务 Spring spring boot</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>2016年过去了，今天是2017年第一个工作日，2017年1月3日。</p>
+<p>新年是回家过得，跟爸妈姐姐很开心，体会到家人身体健康开心快乐才是最重要的。谢谢你们。</p>
+<p>以年度总结的角度去想2016，想到哪里写到哪里：</p>
+<ol>
+<li>前半年纯属浪费]]>
+    </summary>
+    
+      <category term="生活 技术 总结" scheme="http://lq08025107.github.io/tags/%E7%94%9F%E6%B4%BB-%E6%8A%80%E6%9C%AF-%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[微服务架构相关技术汇总]]></title>
