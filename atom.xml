@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Watch and Learn]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lq08025107.github.io/"/>
-  <updated>2017-01-03T01:24:21.818Z</updated>
+  <updated>2017-01-05T07:57:50.792Z</updated>
   <id>http://lq08025107.github.io/</id>
   
   <author>
@@ -13,6 +13,80 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[微服务杂谈与汇总]]></title>
+    <link href="http://lq08025107.github.io/2017/01/05/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%82%E8%B0%88%E4%B8%8E%E6%B1%87%E6%80%BB/"/>
+    <id>http://lq08025107.github.io/2017/01/05/微服务杂谈与汇总/</id>
+    <published>2017-01-05T07:56:23.000Z</published>
+    <updated>2017-01-05T07:57:50.792Z</updated>
+    <content type="html"><![CDATA[<p>服务化资源：</p>
+<p><a href="https://www.zhihu.com/question/37808426" target="_blank" rel="external">SOA和微服务架构的区别</a></p>
+<p>《分布式服务框架原理与实践》</p>
+<p><a href="http://blog.didispace.com/springcloud1/" target="_blank" rel="external">Spring Cloud 构建微服务建构系列博文</a></p>
+<p><a href="http://blog.didispace.com/microservice-framework/" target="_blank" rel="external">Dubbo还是Spring Cloud</a></p>
+<p><a href="https://github.com/eacdy/spring-cloud-book" target="_blank" rel="external">Spring Cloud参考指南</a></p>
+<a id="more"></a>
+<p>单位的项目目前是个半服务化的方案，实现了以下过程：</p>
+<ol>
+<li><p>服务化</p>
+</li>
+<li><p>服务治理，提供注册中心</p>
+<p> 没有使用常用的dubbo这种RPC框架，模拟实现了一个类似的，使用zookeeper做注册中心</p>
+</li>
+<li><p>服务之间以RPC来相互调用</p>
+</li>
+<li><p>部分服务提供REST接口</p>
+</li>
+</ol>
+<p>作为微服务来说缺少的部分：</p>
+<ol>
+<li><p>API-GateWay</p>
+<p> 网关的定位应该是所有请求的入口点。入口点应该实现对api的整理聚合功能、负载均衡功能等等，这部分目前项目是没有的。</p>
+</li>
+<li><p>手机端访问后台服务的形式</p>
+</li>
+</ol>
+<p>一些思考：</p>
+<ol>
+<li><p>RPC到底有没有必要提供REST接口？</p>
+<p> Dubbo没有提供。Dubbox在其基础上提供了REST接口，使用的是EasyRest。所谓框架是服务于业务的，架构的设计会决定框架有没有必要实现一些功能。不直接面对端的服务只是为其他服务提供功能实现，就是传统意义上的RPC，可以不REST，也不该REST。面对端的服务，也许应该实现REST，方便使用，面对端的服务，我们也可以理解它是一个具有MVC架构的消费者，所以他要实现REST其实很简单，SpringMVC完全就可以，然后通过RPC调用不直接面向端的服务。整体架构如下：</p>
+<p> <img src="http://7xr558.com1.z0.glb.clouddn.com/REST.png" alt=""></p>
+<p> 譬如，途中OpenService最好是提供REST接口，其实OpenService完全可以是一个WEB应用，具有SSH或者SSM框架，可以接受任何请求的访问，无论是静态页面端还是app端，后台的服务只是为这个OpenService提供支持。途中至于ServiceC和ServiceD要不要提供REST接口，我的观点是：底层服务就不需要了，增加了调试时候的复杂性的同时，也带来了安全隐患。</p>
+</li>
+<li><p>How to get start?</p>
+<p> 微服务只是一个概念，具体你可以造车轮，来实现这个概念。目前常见的，两个方向：Dubbo系和Spring Cloud系。入手可以Google这两个东西，会带领你start的。dubbo系我算是比较了解了，Spring Cloud系只是进行了入门了解，感触比较大，从以下几个方面来比较：</p>
+<p> A. 上手简单程度： Dubbo简单</p>
+<p> B. 功能完善程度： Spring Cloud，Spring跟Netflix结合提供了那么多组件，注册中心有Eureka，API Gateway有zuul，断路器有Hystrix，客户端访问模式有Ribbon和Feign，配置中心有Config Server。想想看，如何使用Dubbox，功能只有注册中心，其余的都需要根据业务自己考虑。</p>
+<p> C. 文档完善： Dubbo停止维护了已经，Spring Cloud大有刚刚起势之势头。</p>
+<p> D. 其实这么对比他两个是不公平的，参见<a href="http://blog.didispace.com/microservice-framework/" target="_blank" rel="external">Dubbo还是Spring Cloud</a>，一个只是一个RPC框架，一个却是一整套解决方案，上述连接对比两者对比的很清楚了。</p>
+</li>
+<li><p>Spring Cloud</p>
+<p> 入门推荐：<a href="http://blog.didispace.com/springcloud1/" target="_blank" rel="external">Spring Cloud 构建微服务建构系列博文</a></p>
+<p> <a href="https://github.com/eacdy/spring-cloud-book" target="_blank" rel="external">Spring Cloud参考指南</a></p>
+<p> 别人讲的非常好，可以参考一下。</p>
+</li>
+<li><p>Docker与微服务</p>
+<p> 微服务与Docker感觉就是天生的相辅相成，Spring Cloud参考指南里边也对docker的基础只是进行了介绍，之前博客里对docker有所提及。巨石应用拆分为细粒度的服务，测试，部署，运维都将是一个大麻烦，而docker可以直接将上述环节封装在容器中，实现所谓的Devops。不过目前来看，我个人觉得docker在容器编排方面做得还是不太好，用起来还是不很方便。</p>
+</li>
+<li><p>服务之间的内部通信</p>
+<p> 刚才提到了REST，也提到了RPC，其实消息队列也可以实现一些需求，所以在此也需要提及一下Kafka、RabbitMQ等，服务之间通信业可以用这些东西。</p>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>服务化资源：</p>
+<p><a href="https://www.zhihu.com/question/37808426">SOA和微服务架构的区别</a></p>
+<p>《分布式服务框架原理与实践》</p>
+<p><a href="http://blog.didispace.com/springcloud1/">Spring Cloud 构建微服务建构系列博文</a></p>
+<p><a href="http://blog.didispace.com/microservice-framework/">Dubbo还是Spring Cloud</a></p>
+<p><a href="https://github.com/eacdy/spring-cloud-book">Spring Cloud参考指南</a></p>]]>
+    
+    </summary>
+    
+      <category term="微服务 docker" scheme="http://lq08025107.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1-docker/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[2016和2017]]></title>
