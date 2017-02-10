@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Watch and Learn]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lq08025107.github.io/"/>
-  <updated>2017-01-05T07:57:50.792Z</updated>
+  <updated>2017-02-10T01:39:44.049Z</updated>
   <id>http://lq08025107.github.io/</id>
   
   <author>
@@ -13,6 +13,162 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[BottomNavigation使用说明]]></title>
+    <link href="http://lq08025107.github.io/2017/02/10/BottomNavigation%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"/>
+    <id>http://lq08025107.github.io/2017/02/10/BottomNavigation使用说明/</id>
+    <published>2017-02-10T01:38:22.000Z</published>
+    <updated>2017-02-10T01:39:44.049Z</updated>
+    <content type="html"><![CDATA[<p>#BottomNavigation </p>
+<p>##使用说明</p>
+<p>###基本用法</p>
+<p>maven</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;com.ashokvarma.android&lt;/groupId&gt;
+  &lt;artifactId&gt;bottom-navigation-bar&lt;/artifactId&gt;
+  &lt;version&gt;1.3.0&lt;/version&gt;
+  &lt;type&gt;pom&lt;/type&gt;
+&lt;/dependency&gt;
+</code></pre><p>Gradle</p>
+<pre><code>compile &apos;com.ashokvarma.android:bottom-navigation-bar:1.3.0&apos;
+</code></pre><a id="more"></a>
+<p>在你的Activity xml中</p>
+<pre><code>&lt;com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:layout_gravity=&quot;bottom&quot;
+        android:id=&quot;@+id/bottom_navigation_bar&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;/&gt;
+</code></pre><p>在你的类中</p>
+<pre><code>BottomNavigationBar bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
+
+bottomNavigationBar
+                .addItem(new BottomNavigationItem(R.drawable.ic_home_white_24dp, &quot;Home&quot;))
+                .addItem(new BottomNavigationItem(R.drawable.ic_book_white_24dp, &quot;Books&quot;))
+                .addItem(new BottomNavigationItem(R.drawable.ic_music_note_white_24dp, &quot;Music&quot;))
+                .addItem(new BottomNavigationItem(R.drawable.ic_tv_white_24dp, &quot;Movies &amp; TV&quot;))
+                .addItem(new BottomNavigationItem(R.drawable.ic_videogame_asset_white_24dp, &quot;Games&quot;))
+                .initialise();
+</code></pre><p>添加 TabSelectedListener</p>
+<pre><code>bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener(){
+    @Override
+    public void onTabSelected(int position) {
+    }
+    @Override
+    public void onTabUnselected(int position) {
+    }
+    @Override
+    public void onTabReselected(int position) {
+    }
+});
+</code></pre><p>##定制化</p>
+<p>###BottNavigationBar 定制化</p>
+<ol>
+<li>Modes</li>
+</ol>
+<p>Attribute: bnbMode Values: mode_default, mode_fixed, mode_shifting</p>
+<p>Method: setMode() Values:MODE_DEFAULT, MODE_FIXED, MODE_SHIFTING</p>
+<p>设置Mode的代码片段：</p>
+<pre><code>bottomNavigationBar
+                 .setMode(BottomNavigationBar.MODE_FIXED)
+</code></pre><p><strong>MODE_DEFAULT</strong>:如果tabs的数量少于或等于3，使用MODE_FIXED，否则使用MODE_SHIFTING</p>
+<ol>
+<li>Background Styles</li>
+</ol>
+<p>Attribute: bnbBackgroundStyle Values:background_style_default, background_style_static,background_style_ripple</p>
+<p>Method: setBackgroundStyle() Values: BACKGROUND_STYLE_DEFAULT, BACKGROUND_STYLE_STATIC, BACKGROUND_STYLE_RIPPLE</p>
+<p>设置background style的代码片段：</p>
+<pre><code>bottomNavigationBar
+                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE)
+</code></pre><p>BACKGROUND_STYLE_RIPPLE: 如果模式是MODE_FIXED，那么使用BACKGROUND_STYLE_STATIC，如果模式是MODE_SHIFTING，那么使用BACKGROUND_STYLE_RIPPLE</p>
+<ol>
+<li>Colors</li>
+</ol>
+<p>Attributes: bnbActiveColor, bnbInactiveColor, bnbBackgroundColor Value: Color value or resource</p>
+<p>Methods: setActiveColor, setInActiveColor, setBarBackgroundColor Value: Color value or resource</p>
+<p>设置颜色的代码片段：</p>
+<pre><code>bottomNavigationBar
+                 .setActiveColor(R.color.primary)
+                 .setInActiveColor(&quot;#FFFFFF&quot;)
+                 .setBarBackgroundColor(&quot;#ECECEC&quot;)
+</code></pre><p>in-active color: Tab没使用时候图标和文字的颜色</p>
+<p>active color： 当style是BACK_GROUND_STYLE_STATIC，active color是图标和文字被选中的颜色；当style是BACK_GROUND_STYLE_RIPPLE时，active color是底部导航条的背景色</p>
+<p>背景颜色： 当style是BACK_GROUND_STYLE_STATIC时，背景颜色是底部条的背景;当style是BACK_GROUND_STYLE_RIPPLE时，背景颜色是图标和文字被选中的颜色</p>
+<p>默认颜色：</p>
+<ol>
+<li>active color：Theme的Primary color</li>
+<li>in active color: Color.LTGRAY</li>
+<li><p>background color: Color.WHITE</p>
+</li>
+<li><p>BottomNavigationItem 颜色定制</p>
+</li>
+</ol>
+<p>为BottomNavigationItem设置颜色：如果需要为不同的tab设置不同的激活和非激活颜色，当然也可以设置激活和非激活颜色</p>
+<p>代码片段：</p>
+<pre><code>bottomNavigationBar
+               .addItem(new BottomNavigationItem(R.drawable.ic_home_white_24dp, &quot;Home&quot;).setActiveColor(R.color.orange).setInActiveColor(R.color.teal))
+               .addItem(new BottomNavigationItem(R.drawable.ic_book_white_24dp, &quot;Books&quot;).setActiveColor(&quot;#FFFF00&quot;))
+               .addItem(new BottomNavigationItem(R.drawable.ic_music_note_white_24dp, &quot;Music&quot;).setInActiveColor(&quot;#00FFFF&quot;))
+               .addItem(new BottomNavigationItem(R.drawable.ic_tv_white_24dp, &quot;Movies &amp; TV&quot;))
+               .addItem(new BottomNavigationItem(R.drawable.ic_videogame_asset_white_24dp, &quot;Games&quot;).setActiveColor(R.color.grey))
+</code></pre><p>如果没有设置 bottomNavigationItem的激活和非激活颜色，则从 bottomNavigationBar 来继承。</p>
+<ol>
+<li>Elevation 高度</li>
+</ol>
+<p>Attribute： bnbElevation</p>
+<p>默认8dp， 可以设置为0dp</p>
+<ol>
+<li>BottomNavigationItem图标定制</li>
+</ol>
+<p>如果Icon的激活/非激活态只是颜色不同还不能满足你，该控件还允许设置激活/非激活态的不同图标</p>
+<p>代码片段：<br>    new BottomNavigationItem(R.drawable.ic_home_white_24dp, “Home”).setInactiveIcon(R.drawable.ic_home_black)</p>
+<p>##动作设置</p>
+<p>###自动隐藏</p>
+<p>如果控件是在Co-ordinator Layout中，默认地，当用户滑动时，自动隐藏，反方向则出现，若想关闭这个特性：</p>
+<pre><code>bottomNavigationBar.setAutoHideEnabled(false);
+</code></pre><p>###隐藏/出现</p>
+<p>在代码的任何地方，都可以实现BottomNavigationBar的隐藏和出现 </p>
+<pre><code>bottomNavigationBar.hide();
+bottomNavigationBar.show();
+</code></pre><p>##Badges（类似微博微信的小红点）</p>
+<p>代码片段：</p>
+<pre><code>BadgeItem numberBadgeItem = new BadgeItem()
+                .setBorderWidth(4)
+                .setBackgroundColorResource(R.color.blue)
+                .setText(&quot;5&quot;)
+                .setHideOnSelect(autoHide.isChecked());
+
+     bottomNavigationBar
+                .addItem(new BottomNavigationItem(R.drawable.ic_home_white_24dp, &quot;Home&quot;).setActiveColorResource(R.color.orange).setBadgeItem(numberBadgeItem))
+</code></pre><p>可以设置具体的动作等等。</p>
+<h2 id="FAB_26amp_3BSnackBar_uFF08Floating_Action_Bar_u548CSnackBar_uFF09"><a href="#FAB_26amp_3BSnackBar_uFF08Floating_Action_Bar_u548CSnackBar_uFF09" class="headerlink" title="FAB&amp;SnackBar（Floating Action Bar和SnackBar）"></a>FAB&amp;SnackBar（Floating Action Bar和SnackBar）</h2><p>都可以一起使用</p>
+<p>FAB和BottomNavigationBar应该写在一个Coordinator Layout中</p>
+<p>用setFab在bottomNavigationBar上连接所有的部件</p>
+<p>代码片段：</p>
+<pre><code>FloatingActionButton fabHome = (FloatingActionButton) findViewById(R.id.fab_home);
+BottomNavigationBar bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bnb);
+bottomNavigationBar.setFab(fabHome);
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>#BottomNavigation </p>
+<p>##使用说明</p>
+<p>###基本用法</p>
+<p>maven</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;com.ashokvarma.android&lt;/groupId&gt;
+  &lt;artifactId&gt;bottom-navigation-bar&lt;/artifactId&gt;
+  &lt;version&gt;1.3.0&lt;/version&gt;
+  &lt;type&gt;pom&lt;/type&gt;
+&lt;/dependency&gt;
+</code></pre><p>Gradle</p>
+<pre><code>compile &apos;com.ashokvarma.android:bottom-navigation-bar:1.3.0&apos;
+</code></pre>]]>
+    
+    </summary>
+    
+      <category term="Android" scheme="http://lq08025107.github.io/tags/Android/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[微服务杂谈与汇总]]></title>
@@ -1090,23 +1246,6 @@ EasyPusher_RTSP：通过EasyRTSPClient库，将RTSP/RTP数据获取到本地，�
     <![CDATA[<p>这是我使用Github+Hexo的第一篇博客，也不管到底是技术博还是生活或者情感博了，也不知道以后会不会继续更新了，但至少我知道有一个地方，在无聊的时候我可以进来发泄一下。</p>
 <p>今天是正月十五，元宵节，这个节日在我家乡那边算一个很隆重的节日了，刚才爸爸和姐姐去溜大街了，想想自己好久没在家过元宵节了。还记得很小很小的时候，我们还在村里住着，元宵节我和姐姐到城里外婆家过十五，两个人可能一共有1块钱，我姐掌管着（小时候我很依靠姐姐），然后走到烤羊肉串旁边，我说：姐姐，我想吃羊肉串。我俩都不知道那到底是什么味道，后来，姐姐花了2毛钱给我买了一串，具体什么味道早已经忘记了，可是这个细节我记了很久很久。<br>]]>
     
-    </summary>
-    
-      <category term="生活" scheme="http://lq08025107.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <link href="http://lq08025107.github.io/2016/02/22/11/"/>
-    <id>http://lq08025107.github.io/2016/02/22/11/</id>
-    <published>2016-02-22T13:31:57.000Z</published>
-    <updated>2016-04-19T14:24:15.267Z</updated>
-    <content type="html"><![CDATA[<p>11</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>11</p>
-]]>
     </summary>
     
       <category term="生活" scheme="http://lq08025107.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
