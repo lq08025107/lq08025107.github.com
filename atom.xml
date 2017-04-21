@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Watch and Learn]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lq08025107.github.io/"/>
-  <updated>2017-02-10T01:39:44.049Z</updated>
+  <updated>2017-04-21T08:14:10.677Z</updated>
   <id>http://lq08025107.github.io/</id>
   
   <author>
@@ -13,6 +13,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[工作模式所感]]></title>
+    <link href="http://lq08025107.github.io/2017/04/21/%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E6%89%80%E6%84%9F/"/>
+    <id>http://lq08025107.github.io/2017/04/21/工作模式所感/</id>
+    <published>2017-04-21T07:51:39.000Z</published>
+    <updated>2017-04-21T08:14:10.677Z</updated>
+    <content type="html"><![CDATA[<p>最近两周做了一件很傻逼的事情，感觉很痛苦。</p>
+<p>事情是这样的，项目leader兴致勃勃想要做一个检测人脸、划定嫌疑人、报警这么一个项目，让我们几周之内出一个demo。</p>
+<p>于是划定s做算法、y做前端、w做数据库和文件系统，我做后台架构以保证一定的并发。</p>
+<p>工作就这么开始了，开始我并没有活，过了两周之后s拿出了一个demo，用到了openface这个东西，我们都暂时没有能力修改其中的代码，s的代码中用到了os.system(‘cmd’)这种方式调用，且流程是同步的，然后给了我，让我继续下一步工作，开始我是不想接的，后来想想算了吧，反正也不可能真正应用，就试着改改吧，于是悲剧开始了。</p>
+<p>花了两三天功夫，将其中的代码一行一行梳理，拆出主要的三个模块。</p>
+<p>花了一天功夫，优化，能用多线程的用多线程，能用多进程的用多进程。</p>
+<p>花了一天功夫测试，各种悲剧，多进程各种报错，是底层torch库报的错，我无法改进</p>
+<p>最后一天与y调试，可算修修改改调通了，单后w说了，这数据库怎么回事啊，entity都没有更新，我以为我忘记调用那个函数接口了，然后仔细核查代码，发现调用了，最后查了又查，结果是他自己拼接sql语句时偷懒了，where部分写死了，我都无语了。。。</p>
+<p>于是我思考，到底什么样的工作模式才能高效的解决问题：</p>
+<ol>
+<li><p>模块与模块直接，写接口，例如我和前端y，定义了一个json接口，利利索索，这种工作方式最好</p>
+</li>
+<li><p>封装服务，或者rpc调用，这种方式也解耦的很好，但是可能涉及网络，会有一定的延迟</p>
+</li>
+<li><p>代码层级的集成，这个最头疼，决定以后如果涉及这类问题，一定要别人将代码封装成<strong>模块</strong>级别，直接提供函数接口，我绝对不动他代码里的任何东西。I swear！</p>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>最近两周做了一件很傻逼的事情，感觉很痛苦。</p>
+<p>事情是这样的，项目leader兴致勃勃想要做一个检测人脸、划定嫌疑人、报警这么一个项目，让我们几周之内出一个demo。</p>
+<p>于是划定s做算法、y做前端、w做数据库和文件系统，我做后台架构以保证一定的并发。<]]>
+    </summary>
+    
+      <category term="工作模式" scheme="http://lq08025107.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[BottomNavigation使用说明]]></title>

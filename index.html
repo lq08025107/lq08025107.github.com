@@ -73,6 +73,67 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-工作模式所感" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/21/工作模式所感/" class="article-date">
+  <time datetime="2017-04-21T07:51:39.000Z" itemprop="datePublished">2017-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/工作模式所感/">工作模式所感</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近两周做了一件很傻逼的事情，感觉很痛苦。</p>
+<p>事情是这样的，项目leader兴致勃勃想要做一个检测人脸、划定嫌疑人、报警这么一个项目，让我们几周之内出一个demo。</p>
+<p>于是划定s做算法、y做前端、w做数据库和文件系统，我做后台架构以保证一定的并发。</p>
+<p>工作就这么开始了，开始我并没有活，过了两周之后s拿出了一个demo，用到了openface这个东西，我们都暂时没有能力修改其中的代码，s的代码中用到了os.system(‘cmd’)这种方式调用，且流程是同步的，然后给了我，让我继续下一步工作，开始我是不想接的，后来想想算了吧，反正也不可能真正应用，就试着改改吧，于是悲剧开始了。</p>
+<p>花了两三天功夫，将其中的代码一行一行梳理，拆出主要的三个模块。</p>
+<p>花了一天功夫，优化，能用多线程的用多线程，能用多进程的用多进程。</p>
+<p>花了一天功夫测试，各种悲剧，多进程各种报错，是底层torch库报的错，我无法改进</p>
+<p>最后一天与y调试，可算修修改改调通了，单后w说了，这数据库怎么回事啊，entity都没有更新，我以为我忘记调用那个函数接口了，然后仔细核查代码，发现调用了，最后查了又查，结果是他自己拼接sql语句时偷懒了，where部分写死了，我都无语了。。。</p>
+<p>于是我思考，到底什么样的工作模式才能高效的解决问题：</p>
+<ol>
+<li><p>模块与模块直接，写接口，例如我和前端y，定义了一个json接口，利利索索，这种工作方式最好</p>
+</li>
+<li><p>封装服务，或者rpc调用，这种方式也解耦的很好，但是可能涉及网络，会有一定的延迟</p>
+</li>
+<li><p>代码层级的集成，这个最头疼，决定以后如果涉及这类问题，一定要别人将代码封装成<strong>模块</strong>级别，直接提供函数接口，我绝对不动他代码里的任何东西。I swear！</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://lq08025107.github.io/2017/04/21/工作模式所感/" data-id="cj1rk8bcx0006scaup43jzs42" class="article-share-link" data-share="baidu" data-title="工作模式所感">分享到</a>
+      
+
+      
+        <a href="http://lq08025107.github.io/2017/04/21/工作模式所感/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工作模式/">工作模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+ 
+  
     <article id="post-BottomNavigation使用说明" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/02/10/BottomNavigation使用说明/" class="article-date">
@@ -117,7 +178,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2017/02/10/BottomNavigation使用说明/" data-id="ciyz5dyfk001058auvnmdf7lb" class="article-share-link" data-share="baidu" data-title="BottomNavigation使用说明">分享到</a>
+        <a data-url="http://lq08025107.github.io/2017/02/10/BottomNavigation使用说明/" data-id="cj1rk8ben0013scaur9ljzhbm" class="article-share-link" data-share="baidu" data-title="BottomNavigation使用说明">分享到</a>
       
 
       
@@ -171,7 +232,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2017/01/05/微服务杂谈与汇总/" data-id="ciyz5dydx000358au1rnwu99b" class="article-share-link" data-share="baidu" data-title="微服务杂谈与汇总">分享到</a>
+        <a data-url="http://lq08025107.github.io/2017/01/05/微服务杂谈与汇总/" data-id="cj1rk8bct0003scaud2ed8166" class="article-share-link" data-share="baidu" data-title="微服务杂谈与汇总">分享到</a>
       
 
       
@@ -221,7 +282,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2017/01/03/2016和2017/" data-id="ciyz5dyfq001358auh5x5hvz0" class="article-share-link" data-share="baidu" data-title="2016和2017">分享到</a>
+        <a data-url="http://lq08025107.github.io/2017/01/03/2016和2017/" data-id="cj1rk8bes0016scauy3q66uhw" class="article-share-link" data-share="baidu" data-title="2016和2017">分享到</a>
       
 
       
@@ -272,7 +333,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/11/23/微服务架构相关技术汇总/" data-id="ciyz5dyd2000058aup8ibbv6j" class="article-share-link" data-share="baidu" data-title="微服务架构相关技术汇总">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/11/23/微服务架构相关技术汇总/" data-id="cj1rk8bc10000scaun6cgib0e" class="article-share-link" data-share="baidu" data-title="微服务架构相关技术汇总">分享到</a>
       
 
       
@@ -321,7 +382,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/11/10/docker杂谈/" data-id="ciyz5dyea000c58au4nlsrh7p" class="article-share-link" data-share="baidu" data-title="docker杂谈">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/11/10/docker杂谈/" data-id="cj1rk8bdb000fscauh5q1qdsq" class="article-share-link" data-share="baidu" data-title="docker杂谈">分享到</a>
       
 
       
@@ -371,7 +432,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/07/17/Java代理/" data-id="ciyz5dyet000n58au309g26qr" class="article-share-link" data-share="baidu" data-title="Java代理">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/07/17/Java代理/" data-id="cj1rk8bdz000qscauzeis6dt5" class="article-share-link" data-share="baidu" data-title="Java代理">分享到</a>
       
 
       
@@ -417,7 +478,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/07/12/Java-volatile-关键字/" data-id="ciyz5dyez000q58auddi2nwwg" class="article-share-link" data-share="baidu" data-title="Java volatile 关键字">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/07/12/Java-volatile-关键字/" data-id="cj1rk8be5000tscau3uqm2jl5" class="article-share-link" data-share="baidu" data-title="Java volatile 关键字">分享到</a>
       
 
       
@@ -466,7 +527,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/" data-id="ciyz5dye3000658auzvq7g8dl" class="article-share-link" data-share="baidu" data-title="使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/" data-id="cj1rk8bd10009scaup5c77l4t" class="article-share-link" data-share="baidu" data-title="使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现">分享到</a>
       
 
       
@@ -511,7 +572,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/03/19/Sad/" data-id="ciyz5dyei000i58aurb7g9410" class="article-share-link" data-share="baidu" data-title="Sad">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/03/19/Sad/" data-id="cj1rk8bdn000lscauievt5ibu" class="article-share-link" data-share="baidu" data-title="Sad">分享到</a>
       
 
       
@@ -520,53 +581,6 @@
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活/">生活</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
- 
-  
-    <article id="post-What-is-exactly-RESRful-programming" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/09/What-is-exactly-RESRful-programming/" class="article-date">
-  <time datetime="2016-03-09T14:19:44.000Z" itemprop="datePublished">2016-03-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/09/What-is-exactly-RESRful-programming/">What is exactly RESRful programming</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>相信大家在理解REST的时候挺困难吧，最近在理解的时候发现这么一个神贴，有助于理解REST。</p>
-<p><strong>What is exactly RESRful programming</strong><br><a href="http://stackoverflow.com/questions/671118/what-exactly-is-restful-programming" target="_blank" rel="external">http://stackoverflow.com/questions/671118/what-exactly-is-restful-programming</a></p>
-<p>REST和HTTP本来就相辅相成，一切用资源表述，外加几个动作，世界上万物和万物的吃喝拉撒就都解决了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://lq08025107.github.io/2016/03/09/What-is-exactly-RESRful-programming/" data-id="ciyz5dyee000f58au7wo2cdza" class="article-share-link" data-share="baidu" data-title="What is exactly RESRful programming">分享到</a>
-      
-
-      
-        <a href="http://lq08025107.github.io/2016/03/09/What-is-exactly-RESRful-programming/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/REST/">REST</a></li></ul>
 
     </footer>
   </div>
@@ -590,7 +604,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyDarwin/">EasyDarwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop-HDFS/">Hadoop HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/">REST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC-Java/">RPC Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service-Discovery/">Service Discovery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务-docker/">微服务 docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活-技术-总结/">生活 技术 总结</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyDarwin/">EasyDarwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop-HDFS/">Hadoop HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/">REST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC-Java/">RPC Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service-Discovery/">Service Discovery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作模式/">工作模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务-docker/">微服务 docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活-技术-总结/">生活 技术 总结</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -599,7 +613,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/EasyDarwin/" style="font-size: 10px;">EasyDarwin</a> <a href="/tags/Hadoop-HDFS/" style="font-size: 10px;">Hadoop HDFS</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RPC-Java/" style="font-size: 10px;">RPC Java</a> <a href="/tags/Service-Discovery/" style="font-size: 10px;">Service Discovery</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/微服务-docker/" style="font-size: 10px;">微服务 docker</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/生活-技术-总结/" style="font-size: 10px;">生活 技术 总结</a>
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/EasyDarwin/" style="font-size: 10px;">EasyDarwin</a> <a href="/tags/Hadoop-HDFS/" style="font-size: 10px;">Hadoop HDFS</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RPC-Java/" style="font-size: 10px;">RPC Java</a> <a href="/tags/Service-Discovery/" style="font-size: 10px;">Service Discovery</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/工作模式/" style="font-size: 10px;">工作模式</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/微服务-docker/" style="font-size: 10px;">微服务 docker</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/生活-技术-总结/" style="font-size: 10px;">生活 技术 总结</a>
     </div>
   </div>
 
@@ -608,7 +622,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -618,6 +632,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/04/21/工作模式所感/">工作模式所感</a>
+          </li>
         
           <li>
             <a href="/2017/02/10/BottomNavigation使用说明/">BottomNavigation使用说明</a>
@@ -633,10 +651,6 @@
         
           <li>
             <a href="/2016/11/23/微服务架构相关技术汇总/">微服务架构相关技术汇总</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/10/docker杂谈/">docker杂谈</a>
           </li>
         
       </ul>
