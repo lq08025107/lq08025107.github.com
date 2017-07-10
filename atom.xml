@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Watch and Learn]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://lq08025107.github.io/"/>
-  <updated>2017-04-21T08:14:10.677Z</updated>
+  <updated>2017-07-10T07:40:36.553Z</updated>
   <id>http://lq08025107.github.io/</id>
   
   <author>
@@ -13,6 +13,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[近期感想]]></title>
+    <link href="http://lq08025107.github.io/2017/07/10/%E8%BF%91%E6%9C%9F%E6%84%9F%E6%83%B3/"/>
+    <id>http://lq08025107.github.io/2017/07/10/近期感想/</id>
+    <published>2017-07-10T06:38:21.000Z</published>
+    <updated>2017-07-10T07:40:36.553Z</updated>
+    <content type="html"><![CDATA[<h1 id="u751F_u6D3B"><a href="#u751F_u6D3B" class="headerlink" title="生活"></a>生活</h1><p>结束了为期两年的异地恋，张潇同学顺利入职华为，姐姐有了小宝贝，一切安好。</p>
+<h1 id="u80FD_u529B"><a href="#u80FD_u529B" class="headerlink" title="能力"></a>能力</h1><p>增强能力的方式只有一种渠道，就是学习。学习可以增长你的认知，而你的认知决定你的赚钱能力。</p>
+<p>俗人才讲钱，可是我们需要俗，俗才能温饱，俗才能财富自由。</p>
+<p>两年以来，一直在技术和投资方面想做出一点成就，但是，心愿都没有达到。深入了解比特币之后，接触到了<strong>区块链</strong>这个概念，区块链结合了技术和投资，深深的吸引着我们这几个年轻人。</p>
+<h1 id="u6280_u672F"><a href="#u6280_u672F" class="headerlink" title="技术"></a>技术</h1><p>#1<br>随着EOS代币的众筹及交易，这个无节操的币搞坏了整个市场生态，联系300多天众筹，每天根据投入ETH的量来决定EOS众筹的成本价格，相当于一级市场和二级市场同时进行交易，所以萌生了统计实时价格及每个窗口成交量等等的想法，结果，下午就有人做出来了，网址如下： eoschart.com。既然这样我就做个小程序吧，也不做统计了，就我自己看看实时行情。然后开始行动：</p>
+<ul>
+<li><p>数据源：nodejs爬取eoschart的数据作为数据源的一部分；云币网提供实时价格API</p>
+</li>
+<li><p>接口：后台提供json接口</p>
+</li>
+</ul>
+<ul>
+<li>小程序：从hello world做起，直接文字显示实时价格和窗口期价格。结果微信访问接口要求：域名+https，就到tencent申请ssl免费证书，域名使用 <a href="https://iliuqiang.net" target="_blank" rel="external">https://iliuqiang.net</a> ，想来想去还是使用了nginx做反向代理比较方便，如下图：</li>
+</ul>
+<p><img src="http://7xr558.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20170710153707.jpg" alt=""></p>
+<p>吐槽一点，腾讯对于小程序审核太过严格，我估计我这个类似helloworld，但对我挺实用的小程序通不过审核。</p>
+<p>#2</p>
+<p>在1中提到了nginx做反向代理，突发奇想，nginx可否做一个正向代理，通过实践操作，nginx对于http请求， 可以通过proxy_pass直接转发，而对于https，这么做不行，日志类似这样</p>
+<p>“CONNECT www.google.com:443 HTTP/1.1” 400”</p>
+<p>说到正向代理，之前接触过github上一个叫apnproxy的项目，Java实现，网络框架使用的Netty，也就几十个star，在想是否可以用nodejs来实现一个这样的正向代理。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="u751F_u6D3B"><a href="#u751F_u6D3B" class="headerlink" title="生活"></a>生活</h1><p>结束了为期两年的异地恋，张潇同学顺利入职华为，姐姐有了小宝贝，一切安好。</p>
+<h1 id="u80]]>
+    </summary>
+    
+      <category term="生活 学习" scheme="http://lq08025107.github.io/tags/%E7%94%9F%E6%B4%BB-%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[工作模式所感]]></title>

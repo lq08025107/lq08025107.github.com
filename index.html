@@ -73,6 +73,70 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-近期感想" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/10/近期感想/" class="article-date">
+  <time datetime="2017-07-10T06:38:21.000Z" itemprop="datePublished">2017-07-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/10/近期感想/">近期感想</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="u751F_u6D3B"><a href="#u751F_u6D3B" class="headerlink" title="生活"></a>生活</h1><p>结束了为期两年的异地恋，张潇同学顺利入职华为，姐姐有了小宝贝，一切安好。</p>
+<h1 id="u80FD_u529B"><a href="#u80FD_u529B" class="headerlink" title="能力"></a>能力</h1><p>增强能力的方式只有一种渠道，就是学习。学习可以增长你的认知，而你的认知决定你的赚钱能力。</p>
+<p>俗人才讲钱，可是我们需要俗，俗才能温饱，俗才能财富自由。</p>
+<p>两年以来，一直在技术和投资方面想做出一点成就，但是，心愿都没有达到。深入了解比特币之后，接触到了<strong>区块链</strong>这个概念，区块链结合了技术和投资，深深的吸引着我们这几个年轻人。</p>
+<h1 id="u6280_u672F"><a href="#u6280_u672F" class="headerlink" title="技术"></a>技术</h1><p>#1<br>随着EOS代币的众筹及交易，这个无节操的币搞坏了整个市场生态，联系300多天众筹，每天根据投入ETH的量来决定EOS众筹的成本价格，相当于一级市场和二级市场同时进行交易，所以萌生了统计实时价格及每个窗口成交量等等的想法，结果，下午就有人做出来了，网址如下： eoschart.com。既然这样我就做个小程序吧，也不做统计了，就我自己看看实时行情。然后开始行动：</p>
+<ul>
+<li><p>数据源：nodejs爬取eoschart的数据作为数据源的一部分；云币网提供实时价格API</p>
+</li>
+<li><p>接口：后台提供json接口</p>
+</li>
+</ul>
+<ul>
+<li>小程序：从hello world做起，直接文字显示实时价格和窗口期价格。结果微信访问接口要求：域名+https，就到tencent申请ssl免费证书，域名使用 <a href="https://iliuqiang.net" target="_blank" rel="external">https://iliuqiang.net</a> ，想来想去还是使用了nginx做反向代理比较方便，如下图：</li>
+</ul>
+<p><img src="http://7xr558.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20170710153707.jpg" alt=""></p>
+<p>吐槽一点，腾讯对于小程序审核太过严格，我估计我这个类似helloworld，但对我挺实用的小程序通不过审核。</p>
+<p>#2</p>
+<p>在1中提到了nginx做反向代理，突发奇想，nginx可否做一个正向代理，通过实践操作，nginx对于http请求， 可以通过proxy_pass直接转发，而对于https，这么做不行，日志类似这样</p>
+<p>“CONNECT www.google.com:443 HTTP/1.1” 400”</p>
+<p>说到正向代理，之前接触过github上一个叫apnproxy的项目，Java实现，网络框架使用的Netty，也就几十个star，在想是否可以用nodejs来实现一个这样的正向代理。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://lq08025107.github.io/2017/07/10/近期感想/" data-id="cj4xu9c3q0000nkau2q0npb62" class="article-share-link" data-share="baidu" data-title="近期感想">分享到</a>
+      
+
+      
+        <a href="http://lq08025107.github.io/2017/07/10/近期感想/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活-学习/">生活 学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+ 
+  
     <article id="post-工作模式所感" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/21/工作模式所感/" class="article-date">
@@ -117,7 +181,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2017/04/21/工作模式所感/" data-id="cj1rk8bcx0006scaup43jzs42" class="article-share-link" data-share="baidu" data-title="工作模式所感">分享到</a>
+        <a data-url="http://lq08025107.github.io/2017/04/21/工作模式所感/" data-id="cj4xu9c4s0009nkaukcdu403g" class="article-share-link" data-share="baidu" data-title="工作模式所感">分享到</a>
       
 
       
@@ -178,7 +242,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2017/02/10/BottomNavigation使用说明/" data-id="cj1rk8ben0013scaur9ljzhbm" class="article-share-link" data-share="baidu" data-title="BottomNavigation使用说明">分享到</a>
+        <a data-url="http://lq08025107.github.io/2017/02/10/BottomNavigation使用说明/" data-id="cj4xu9c6j0016nkau5te70jct" class="article-share-link" data-share="baidu" data-title="BottomNavigation使用说明">分享到</a>
       
 
       
@@ -232,7 +296,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2017/01/05/微服务杂谈与汇总/" data-id="cj1rk8bct0003scaud2ed8166" class="article-share-link" data-share="baidu" data-title="微服务杂谈与汇总">分享到</a>
+        <a data-url="http://lq08025107.github.io/2017/01/05/微服务杂谈与汇总/" data-id="cj4xu9c4o0006nkauokum6hi0" class="article-share-link" data-share="baidu" data-title="微服务杂谈与汇总">分享到</a>
       
 
       
@@ -282,7 +346,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2017/01/03/2016和2017/" data-id="cj1rk8bes0016scauy3q66uhw" class="article-share-link" data-share="baidu" data-title="2016和2017">分享到</a>
+        <a data-url="http://lq08025107.github.io/2017/01/03/2016和2017/" data-id="cj4xu9c6q0019nkauvhs8gumh" class="article-share-link" data-share="baidu" data-title="2016和2017">分享到</a>
       
 
       
@@ -333,7 +397,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/11/23/微服务架构相关技术汇总/" data-id="cj1rk8bc10000scaun6cgib0e" class="article-share-link" data-share="baidu" data-title="微服务架构相关技术汇总">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/11/23/微服务架构相关技术汇总/" data-id="cj4xu9c4k0003nkaua5hpwk3v" class="article-share-link" data-share="baidu" data-title="微服务架构相关技术汇总">分享到</a>
       
 
       
@@ -382,7 +446,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/11/10/docker杂谈/" data-id="cj1rk8bdb000fscauh5q1qdsq" class="article-share-link" data-share="baidu" data-title="docker杂谈">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/11/10/docker杂谈/" data-id="cj4xu9c59000inkauppjtgxm3" class="article-share-link" data-share="baidu" data-title="docker杂谈">分享到</a>
       
 
       
@@ -432,7 +496,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/07/17/Java代理/" data-id="cj1rk8bdz000qscauzeis6dt5" class="article-share-link" data-share="baidu" data-title="Java代理">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/07/17/Java代理/" data-id="cj4xu9c5t000tnkauhp5j4h9c" class="article-share-link" data-share="baidu" data-title="Java代理">分享到</a>
       
 
       
@@ -478,7 +542,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/07/12/Java-volatile-关键字/" data-id="cj1rk8be5000tscau3uqm2jl5" class="article-share-link" data-share="baidu" data-title="Java volatile 关键字">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/07/12/Java-volatile-关键字/" data-id="cj4xu9c5z000wnkaucasa1igf" class="article-share-link" data-share="baidu" data-title="Java volatile 关键字">分享到</a>
       
 
       
@@ -527,7 +591,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/" data-id="cj1rk8bd10009scaup5c77l4t" class="article-share-link" data-share="baidu" data-title="使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/" data-id="cj4xu9c4x000cnkauc690y7a9" class="article-share-link" data-share="baidu" data-title="使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现">分享到</a>
       
 
       
@@ -536,51 +600,6 @@
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Service-Discovery/">Service Discovery</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
- 
-  
-    <article id="post-Sad" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/19/Sad/" class="article-date">
-  <time datetime="2016-03-19T14:38:10.000Z" itemprop="datePublished">2016-03-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/19/Sad/">Sad</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>以后再也见不到奶奶了。。。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://lq08025107.github.io/2016/03/19/Sad/" data-id="cj1rk8bdn000lscauievt5ibu" class="article-share-link" data-share="baidu" data-title="Sad">分享到</a>
-      
-
-      
-        <a href="http://lq08025107.github.io/2016/03/19/Sad/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活/">生活</a></li></ul>
 
     </footer>
   </div>
@@ -604,7 +623,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyDarwin/">EasyDarwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop-HDFS/">Hadoop HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/">REST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC-Java/">RPC Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service-Discovery/">Service Discovery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作模式/">工作模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务-docker/">微服务 docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活-技术-总结/">生活 技术 总结</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyDarwin/">EasyDarwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop-HDFS/">Hadoop HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/">REST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC-Java/">RPC Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service-Discovery/">Service Discovery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作模式/">工作模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务-docker/">微服务 docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活-学习/">生活 学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活-技术-总结/">生活 技术 总结</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -613,7 +632,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/EasyDarwin/" style="font-size: 10px;">EasyDarwin</a> <a href="/tags/Hadoop-HDFS/" style="font-size: 10px;">Hadoop HDFS</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RPC-Java/" style="font-size: 10px;">RPC Java</a> <a href="/tags/Service-Discovery/" style="font-size: 10px;">Service Discovery</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/工作模式/" style="font-size: 10px;">工作模式</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/微服务-docker/" style="font-size: 10px;">微服务 docker</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/生活-技术-总结/" style="font-size: 10px;">生活 技术 总结</a>
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/EasyDarwin/" style="font-size: 10px;">EasyDarwin</a> <a href="/tags/Hadoop-HDFS/" style="font-size: 10px;">Hadoop HDFS</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RPC-Java/" style="font-size: 10px;">RPC Java</a> <a href="/tags/Service-Discovery/" style="font-size: 10px;">Service Discovery</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/工作模式/" style="font-size: 10px;">工作模式</a> <a href="/tags/微服务/" style="font-size: 10px;">微服务</a> <a href="/tags/微服务-docker/" style="font-size: 10px;">微服务 docker</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/生活-学习/" style="font-size: 10px;">生活 学习</a> <a href="/tags/生活-技术-总结/" style="font-size: 10px;">生活 技术 总结</a>
     </div>
   </div>
 
@@ -622,7 +641,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -632,6 +651,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/07/10/近期感想/">近期感想</a>
+          </li>
         
           <li>
             <a href="/2017/04/21/工作模式所感/">工作模式所感</a>
@@ -647,10 +670,6 @@
         
           <li>
             <a href="/2017/01/03/2016和2017/">2016和2017</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/23/微服务架构相关技术汇总/">微服务架构相关技术汇总</a>
           </li>
         
       </ul>
