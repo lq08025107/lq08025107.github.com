@@ -97,30 +97,16 @@
       
         <h1 id="u751F_u6D3B"><a href="#u751F_u6D3B" class="headerlink" title="生活"></a>生活</h1><p>结束了为期两年的异地恋，张潇同学顺利入职华为，姐姐有了小宝贝，一切安好。</p>
 <h1 id="u80FD_u529B"><a href="#u80FD_u529B" class="headerlink" title="能力"></a>能力</h1><p>增强能力的方式只有一种渠道，就是学习。学习可以增长你的认知，而你的认知决定你的赚钱能力。</p>
-<p>俗人才讲钱，可是我们需要俗，俗才能温饱，俗才能财富自由。</p>
-<p>两年以来，一直在技术和投资方面想做出一点成就，但是，心愿都没有达到。深入了解比特币之后，接触到了<strong>区块链</strong>这个概念，区块链结合了技术和投资，深深的吸引着我们这几个年轻人。</p>
-<h1 id="u6280_u672F"><a href="#u6280_u672F" class="headerlink" title="技术"></a>技术</h1><p>#1<br>随着EOS代币的众筹及交易，这个无节操的币搞坏了整个市场生态，联系300多天众筹，每天根据投入ETH的量来决定EOS众筹的成本价格，相当于一级市场和二级市场同时进行交易，所以萌生了统计实时价格及每个窗口成交量等等的想法，结果，下午就有人做出来了，网址如下： eoschart.com。既然这样我就做个小程序吧，也不做统计了，就我自己看看实时行情。然后开始行动：</p>
-<ul>
-<li><p>数据源：nodejs爬取eoschart的数据作为数据源的一部分；云币网提供实时价格API</p>
-</li>
-<li><p>接口：后台提供json接口</p>
-</li>
-</ul>
-<ul>
-<li>小程序：从hello world做起，直接文字显示实时价格和窗口期价格。结果微信访问接口要求：域名+https，就到tencent申请ssl免费证书，域名使用 <a href="https://iliuqiang.net" target="_blank" rel="external">https://iliuqiang.net</a> ，想来想去还是使用了nginx做反向代理比较方便，如下图：</li>
-</ul>
-<p><img src="http://7xr558.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20170710153707.jpg" alt=""></p>
-<p>吐槽一点，腾讯对于小程序审核太过严格，我估计我这个类似helloworld，但对我挺实用的小程序通不过审核。</p>
-<p>#2</p>
-<p>在1中提到了nginx做反向代理，突发奇想，nginx可否做一个正向代理，通过实践操作，nginx对于http请求， 可以通过proxy_pass直接转发，而对于https，这么做不行，日志类似这样</p>
-<p>“CONNECT www.google.com:443 HTTP/1.1” 400”</p>
-<p>说到正向代理，之前接触过github上一个叫apnproxy的项目，Java实现，网络框架使用的Netty，也就几十个star，在想是否可以用nodejs来实现一个这样的正向代理。</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2017/07/10/近期感想/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2017/07/10/近期感想/" data-id="cj4xufn2300008kaubxlsvvdl" class="article-share-link" data-share="baidu" data-title="近期感想">分享到</a>
+        <a data-url="http://lq08025107.github.io/2017/07/10/近期感想/" data-id="cj4xul9vz0000tgaulyxiimwa" class="article-share-link" data-share="baidu" data-title="近期感想">分享到</a>
       
 
       
@@ -163,25 +149,16 @@
 <p>事情是这样的，项目leader兴致勃勃想要做一个检测人脸、划定嫌疑人、报警这么一个项目，让我们几周之内出一个demo。</p>
 <p>于是划定s做算法、y做前端、w做数据库和文件系统，我做后台架构以保证一定的并发。</p>
 <p>工作就这么开始了，开始我并没有活，过了两周之后s拿出了一个demo，用到了openface这个东西，我们都暂时没有能力修改其中的代码，s的代码中用到了os.system(‘cmd’)这种方式调用，且流程是同步的，然后给了我，让我继续下一步工作，开始我是不想接的，后来想想算了吧，反正也不可能真正应用，就试着改改吧，于是悲剧开始了。</p>
-<p>花了两三天功夫，将其中的代码一行一行梳理，拆出主要的三个模块。</p>
-<p>花了一天功夫，优化，能用多线程的用多线程，能用多进程的用多进程。</p>
-<p>花了一天功夫测试，各种悲剧，多进程各种报错，是底层torch库报的错，我无法改进</p>
-<p>最后一天与y调试，可算修修改改调通了，单后w说了，这数据库怎么回事啊，entity都没有更新，我以为我忘记调用那个函数接口了，然后仔细核查代码，发现调用了，最后查了又查，结果是他自己拼接sql语句时偷懒了，where部分写死了，我都无语了。。。</p>
-<p>于是我思考，到底什么样的工作模式才能高效的解决问题：</p>
-<ol>
-<li><p>模块与模块直接，写接口，例如我和前端y，定义了一个json接口，利利索索，这种工作方式最好</p>
-</li>
-<li><p>封装服务，或者rpc调用，这种方式也解耦的很好，但是可能涉及网络，会有一定的延迟</p>
-</li>
-<li><p>代码层级的集成，这个最头疼，决定以后如果涉及这类问题，一定要别人将代码封装成<strong>模块</strong>级别，直接提供函数接口，我绝对不动他代码里的任何东西。I swear！</p>
-</li>
-</ol>
-
+        
+          <p class="article-more-link">
+            <a href="/2017/04/21/工作模式所感/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2017/04/21/工作模式所感/" data-id="cj4xufn3600098kaue48km3q0" class="article-share-link" data-share="baidu" data-title="工作模式所感">分享到</a>
+        <a data-url="http://lq08025107.github.io/2017/04/21/工作模式所感/" data-id="cj4xul9x00009tgau02qa7jfw" class="article-share-link" data-share="baidu" data-title="工作模式所感">分享到</a>
       
 
       
@@ -242,7 +219,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2017/02/10/BottomNavigation使用说明/" data-id="cj4xufn5100168kaup530o04x" class="article-share-link" data-share="baidu" data-title="BottomNavigation使用说明">分享到</a>
+        <a data-url="http://lq08025107.github.io/2017/02/10/BottomNavigation使用说明/" data-id="cj4xul9yo0016tgauk1q4wg8r" class="article-share-link" data-share="baidu" data-title="BottomNavigation使用说明">分享到</a>
       
 
       
@@ -296,7 +273,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2017/01/05/微服务杂谈与汇总/" data-id="cj4xufn3100068kaupxib3vjz" class="article-share-link" data-share="baidu" data-title="微服务杂谈与汇总">分享到</a>
+        <a data-url="http://lq08025107.github.io/2017/01/05/微服务杂谈与汇总/" data-id="cj4xul9ww0006tgau8r65q7n7" class="article-share-link" data-share="baidu" data-title="微服务杂谈与汇总">分享到</a>
       
 
       
@@ -346,7 +323,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2017/01/03/2016和2017/" data-id="cj4xufn5700198kauaxz4wjps" class="article-share-link" data-share="baidu" data-title="2016和2017">分享到</a>
+        <a data-url="http://lq08025107.github.io/2017/01/03/2016和2017/" data-id="cj4xul9yv0019tgaupowe8d2h" class="article-share-link" data-share="baidu" data-title="2016和2017">分享到</a>
       
 
       
@@ -397,7 +374,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/11/23/微服务架构相关技术汇总/" data-id="cj4xufn2v00038kau6vpp3xyd" class="article-share-link" data-share="baidu" data-title="微服务架构相关技术汇总">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/11/23/微服务架构相关技术汇总/" data-id="cj4xul9wr0003tgauo5ogxlfo" class="article-share-link" data-share="baidu" data-title="微服务架构相关技术汇总">分享到</a>
       
 
       
@@ -446,7 +423,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/11/10/docker杂谈/" data-id="cj4xufn3m000i8kaux7iuc9bh" class="article-share-link" data-share="baidu" data-title="docker杂谈">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/11/10/docker杂谈/" data-id="cj4xul9xg000itgaulq8xmrrh" class="article-share-link" data-share="baidu" data-title="docker杂谈">分享到</a>
       
 
       
@@ -496,7 +473,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/07/17/Java代理/" data-id="cj4xufn4a000t8kau4j4liz8l" class="article-share-link" data-share="baidu" data-title="Java代理">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/07/17/Java代理/" data-id="cj4xul9xz000ttgauqh8tmayz" class="article-share-link" data-share="baidu" data-title="Java代理">分享到</a>
       
 
       
@@ -542,7 +519,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/07/12/Java-volatile-关键字/" data-id="cj4xufn4j000w8kaubz2h2dq8" class="article-share-link" data-share="baidu" data-title="Java volatile 关键字">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/07/12/Java-volatile-关键字/" data-id="cj4xul9y5000wtgaugs832q1x" class="article-share-link" data-share="baidu" data-title="Java volatile 关键字">分享到</a>
       
 
       
@@ -591,7 +568,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://lq08025107.github.io/2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/" data-id="cj4xufn3a000c8kau408jncq6" class="article-share-link" data-share="baidu" data-title="使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现">分享到</a>
+        <a data-url="http://lq08025107.github.io/2016/03/26/使用Consul-Consul-template-Docker-Registrator-nginx实现动态服务注册和服务发现/" data-id="cj4xul9x4000ctgaurcx2cs5t" class="article-share-link" data-share="baidu" data-title="使用Consul+Consul template+Docker+Registrator+nginx实现动态服务注册和服务发现">分享到</a>
       
 
       
