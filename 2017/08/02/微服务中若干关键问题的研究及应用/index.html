@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>微服务中若干关键问题的研究及应用 | 刘强的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="微服务中若干关键问题的研究及应用
+摘要
+微服务软件架构正处于兴起阶段，Netflix、亚马逊等互联网公司的成功案例表明微服务在大规模企业应用中有较明显的优势。本文介绍微服务架构的概念，分析微服务架构的优点和缺点，对微服务实践中的三个问题进行详细阐述，即：通信、服务发现、服务部署。为了满足项目对可伸缩性和高可用性的要求，设计了基于微服务的架构方案，采用微服务和容器结合的虚拟化方式，构建了基础服务，在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务中若干关键问题的研究及应用">
+<meta property="og:url" content="http://lq08025107.github.io/2017/08/02/微服务中若干关键问题的研究及应用/index.html">
+<meta property="og:site_name" content="刘强的博客">
+<meta property="og:description" content="微服务中若干关键问题的研究及应用
+摘要
+微服务软件架构正处于兴起阶段，Netflix、亚马逊等互联网公司的成功案例表明微服务在大规模企业应用中有较明显的优势。本文介绍微服务架构的概念，分析微服务架构的优点和缺点，对微服务实践中的三个问题进行详细阐述，即：通信、服务发现、服务部署。为了满足项目对可伸缩性和高可用性的要求，设计了基于微服务的架构方案，采用微服务和容器结合的虚拟化方式，构建了基础服务，在">
+<meta property="og:image" content="http://7xr558.com1.z0.glb.clouddn.com/1.jpg">
+<meta property="og:image" content="http://7xr558.com1.z0.glb.clouddn.com/2.jpg">
+<meta property="og:image" content="http://7xr558.com1.z0.glb.clouddn.com/3.jpg">
+<meta property="og:image" content="http://7xr558.com1.z0.glb.clouddn.com/4.jpg">
+<meta property="og:updated_time" content="2017-08-02T08:54:35.402Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微服务中若干关键问题的研究及应用">
+<meta name="twitter:description" content="微服务中若干关键问题的研究及应用
+摘要
+微服务软件架构正处于兴起阶段，Netflix、亚马逊等互联网公司的成功案例表明微服务在大规模企业应用中有较明显的优势。本文介绍微服务架构的概念，分析微服务架构的优点和缺点，对微服务实践中的三个问题进行详细阐述，即：通信、服务发现、服务部署。为了满足项目对可伸缩性和高可用性的要求，设计了基于微服务的架构方案，采用微服务和容器结合的虚拟化方式，构建了基础服务，在">
+  
+    <link rel="alternative" href="/atom.xml" title="刘强的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">刘强的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Watch and Learn</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="lq08025107.github.io">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-微服务中若干关键问题的研究及应用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/微服务中若干关键问题的研究及应用/" class="article-date">
+  <time datetime="2017-08-02T08:37:16.000Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      微服务中若干关键问题的研究及应用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>微服务中若干关键问题的研究及应用</p>
+<p>摘要</p>
+<p>微服务软件架构正处于兴起阶段，Netflix、亚马逊等互联网公司的成功案例表明微服务在大规模企业应用中有较明显的优势。本文介绍微服务架构的概念，分析微服务架构的优点和缺点，对微服务实践中的三个问题进行详细阐述，即：通信、服务发现、服务部署。为了满足项目对可伸缩性和高可用性的要求，设计了基于微服务的架构方案，采用微服务和容器结合的虚拟化方式，构建了基础服务，在此之上根据业务需求组合基础服务形成应用服务。</p>
+<p>关键词：微服务，服务治理，虚拟化，基础服务</p>
+<a id="more"></a>
+<p><strong>Research and Implementation on Some Key Problems of Micro-service</strong></p>
+<p><strong>Abstract</strong></p>
+<p>Micro-service software architecture is in the stage of exploration. Netflix,<br>Amazon and other Internet companies’ success stories show that micro-service<br>have obvious advantages in large-scale enterprise applications. This paper<br>introduces the concept of micro-service architecture, analyzes the advantages<br>and disadvantages of micro-service architecture, and elaborates three problems<br>in micro-service practice, namely, communication, service discovery and service<br>deployment. In order to meet the requirements of project’s scalability and high<br>availability, the architecture scheme based on micro-service is designed.<br>Combining micro-service and container, we build some basic services. On this<br>basis, according to the business demand, applications are built perfectly.</p>
+<p><strong>Key words</strong>: micro-service，service management，virtualization，basic services</p>
+<p>目录</p>
+<p><a href="/#引言">1 引言 </a></p>
+<p><a href="/#微服务的优点和缺点">2 微服务的优点和缺点 </a></p>
+<p><a href="/#微服务的关键问题分析">3 微服务的关键问题分析 </a></p>
+<p><a href="/#服务间通信问题">3.1 服务间通信问题 </a></p>
+<p><a href="/#rpc框架">3.1.1 RPC框架 </a></p>
+<p><a href="/#rest">3.1.2 REST </a></p>
+<p><a href="/#基于事件的异步通信">3.1.3 基于事件的异步通信 </a></p>
+<p><a href="/#api-gateway">3.1.4 API Gateway </a></p>
+<p><a href="/#服务发现">3.2 服务发现 </a></p>
+<p><a href="/#服务部署">3.3 服务部署 </a></p>
+<p><a href="/#微服务的实际应用">4 微服务的实际应用 </a></p>
+<p><a href="/#结论">5 结论 </a></p>
+<p><a href="/#参考文献">参考文献 </a></p>
+<h1 id="u5F15_u8A00"><a href="#u5F15_u8A00" class="headerlink" title="引言"></a>引言</h1><p>微服务[1]是一种架构风格，微服务的概念起源于2014年3月Martin<br>Flowler所写的一篇文章[2]，尽管微服务这种架构没有明确的定义，但是具有一些共同的特性：协同工作的小而自治的服务。按照微服务架构的思想，将复杂的应用分解为多个微小的服务，这些服务运行在各自的进程中，使用与语言无关的轻量级通信机制相互协调，每个服务围绕各自的业务进行构建，可使用不同的编程语言和存储技术，并能够通过自动化机制独立部署。</p>
+<p>任何事情都不是一蹴而就的，微服务架构也是如此，图1描述了应用架构的演进的历史[3]。具体阐述如下：</p>
+<p><img src="http://7xr558.com1.z0.glb.clouddn.com/1.jpg" alt="图1"></p>
+<p>MVC架构：当业务规模很小时，将所有功能都部署在同一个进程中，通过双机或者前置负载均衡器实现负载分流，此时，用于分离前后台逻辑的MVC架构是关键。</p>
+<p>RPC架构：当垂直应用越来越多，应用之间交互不可避免，将核心和公共业务抽取出来，作为独立的服务，此时，用于提高业务复用及拆分的RPC框架是关键。</p>
+<p>SOA架构：随着业务发展，服务数量越来越多，服务生命周期管控和运行态的治理成为瓶颈，此时用于提升服务质量的SOA成为关键。</p>
+<p>微服务架构：随着敏捷开发、持续交付、DevOps理论的发展和实践，以及基于Docker等轻量级容器（LXC）部署应用和服务的成熟，微服务架构开始流行，逐渐成为应用架构未来的演进方向。通过服务的原子化拆分，以及微服务的独立打包、部署和升级，小团队敏捷交付，应用的交付周期将缩短，运维成本也将大幅下降。</p>
+<h1 id="u5FAE_u670D_u52A1_u7684_u4F18_u70B9_u548C_u7F3A_u70B9"><a href="#u5FAE_u670D_u52A1_u7684_u4F18_u70B9_u548C_u7F3A_u70B9" class="headerlink" title="微服务的优点和缺点"></a><br>微服务的优点和缺点</h1><p>微服务的思路是将单一的巨大应用拆分为众多松耦合的微小服务，通常是按照业务功能来分解的，每一个服务虽然小但却实现完整的功能，使用私有的数据库，可以单独构建和部署，单个服务的修改和部署不影响其他正在运行的服务，提供语言无关的API接口供其他模块调用，这种风格与传统的面向服务架构SOA[4]比较相似，经过多年的发展，SOAP、Web<br>Services、ESB[5]等技术的出现使SOA得以实现，众多厂商也制定了相关标准，两者最重要的区别在于SOA使用复杂的ESB集成为单一应用，而微服务是轻量级的，松耦合，可以独立部署。微服务可由不同的团队独立开发，互不影响，而且微服务架构对持续交付是一种巨大的推动力，允许在频繁发布不同服务的同时保证系统其他部分的可用性和稳定性。</p>
+<p>虽然微服务架构的一些想法是好的，但当整体实现时也会呈现出复杂性，其缺点体现在：</p>
+<p>1.<br>必须有坚实的DevOps[6]开发运维一体化技能：开发人员需要熟知运维环境，而运维人员也需掌握必要的技术，譬如NoSQL等，具有较强DevOps技能的人员比较稀缺，会带来招聘人才方面的挑战。</p>
+<p>2.<br>性能问题：微服务应用中每个服务都运行在独立的进程中，服务之间的调用需要通过网络传输，当众多服务需要相互调用时，就要考虑网络延迟对系统的影响了。</p>
+<p>3.<br>数据一致性问题：微服务本质上也是一个分布式系统，那么就避不开数据一致性这个问题，事实上微服务架构中解决数据一致性问题的确比单体应用中困难。</p>
+<p>微服务架构有利有弊，在考虑是否使用微服务架构时，需要权衡利弊，结合实际业务场景，做出正确的选择。</p>
+<h1 id="u5FAE_u670D_u52A1_u7684_u5173_u952E_u95EE_u9898_u5206_u6790"><a href="#u5FAE_u670D_u52A1_u7684_u5173_u952E_u95EE_u9898_u5206_u6790" class="headerlink" title="微服务的关键问题分析"></a>微服务的关键问题分析</h1><h2 id="u670D_u52A1_u95F4_u901A_u4FE1_u95EE_u9898"><a href="#u670D_u52A1_u95F4_u901A_u4FE1_u95EE_u9898" class="headerlink" title="服务间通信问题"></a>服务间通信问题</h2><p>微服务是一个分布式系统，服务被部署在不同的节点中，服务的交互需要通过网络进行通信，因此服务间的通信是一个需要考虑的问题，它会直接影响整个系统的性能。</p>
+<p>首先要考虑的问题是，服务间的通信应该采用的模式，即同步还是异步，这个基础性的选择会不可避免的引导我们使用不同的实现。如果使用同步通信，发起一个远程服务调用后，调用方会阻塞自己并等待整个操作的完成，而异步通信调用方不需要等待操作完成即可返回，甚至可能不需要关心这个操作完成与否。这两种通信模式对应各自的协作风格，即请求/响应模式和基于事件模式。对于前者来说，客户端发起一个请求，然后等待响应，这种模式可以很好的匹配同步通信，但是异步通信也可以采用这种模式，客户端发起请求，然后注册回调，当服务端操作结束后，会调用该回调。对于后者来说，情况则完全不同，客户端不是发起请求，而是发布一个事件，然后等待其他的协作者接收该消息，并且知道该怎么做，基于事件的系统天生就是异步的，客户端发布一个事件，但并不需要知道谁会对此做出响应，这也意味着，可以在不影响客户端的情况下对该事件添加新的订阅者。</p>
+<p>针对请求/响应方式，可以考虑两种技术：RPC（Remote Procedure<br>Call，远程过程调用）和REST[7]（Representational State<br>Transfer，表述性状态转移）。开源RPC框架有很多，按照偏重的功能来划分，分为服务治理型和跨语言调用型，服务治理型RPC框架有淘宝的dubbo[8]、新浪的motan[9]，跨语言调用型RPC有Thrift[10]、gRPC[11]等等。</p>
+<p>针对基于事件的异步通信，则可以借用众多成熟的消息系统，如RabbitMQ[12]、Apache<br>Kafka[13]等，它们都支持多种语言接口，并且提供持久化的、异步的、高性能的消息通信机制，对于复杂的微服务，使用消息系统的优势很明显，它实现了服务间的解耦，并且解决了分布式系统中的可靠性问题。</p>
+<h3 id="RPC_u6846_u67B6"><a href="#RPC_u6846_u67B6" class="headerlink" title="RPC框架"></a>RPC框架</h3><p>由于篇幅限制，挑选典型的两个框架进行介绍，即dubbo和thrift。</p>
+<p>dubbo是一个分布式服务框架，致力于提供高性能和透明化的RPC远程服务调用方案，以及SOA服务治理方案，其核心部分包含：</p>
+<p>远程通讯：提供对多种基于长连接的NIO框架抽象封装，包括多种线程模型、序列化、以及“请求-响应”模式的信息交换方式。</p>
+<p>集群容错：提供基于接口方法的透明远程过程调用，包括多协议支持，以及软负载均衡，失败容错、地址路由、动态配置等集群支持。</p>
+<p>自动发现：基于注册中心目录服务，使服务消费方能动态查找服务提供方，使地址透明，使服务提供方可以平滑增加或减少机器。</p>
+<p>Thrift是一个软件框架，用来进行可扩展且跨语言的服务的开发，它结合了功能强大的软件堆栈和代码生成引擎，以构建在多种语言之间无缝结合的、高效的服务。</p>
+<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><p>REST是受WEB启发而产生的一种架构风格，REST风格包含了很多原则和限制，我们专注于在微服务的世界里使用REST更好地解决集成问题。REST是RPC的一种替代方案。</p>
+<p>REST本身没有提到底层应该用什么协议，但HTTP天生与REST搭配，HTTP本身提供了很多功能，这些功能对实现REST风格非常有用，譬如说，HTTP的动词GET、PUT、POST就能很好地和资源一起使用。</p>
+<p>对比于RPC，基于HTTP的REST有优点也有缺点，优点是：有许多很好的HTTP客户端库可供使用，客户端和服务端代码完全解耦；缺点是：在要求低延迟的场景下，每个HTTP请求的封装开销是个大问题；需要自己动手实现支持高级的序列化和反序列化机制。</p>
+<h3 id="u57FA_u4E8E_u4E8B_u4EF6_u7684_u5F02_u6B65_u901A_u4FE1"><a href="#u57FA_u4E8E_u4E8B_u4EF6_u7684_u5F02_u6B65_u901A_u4FE1" class="headerlink" title="基于事件的异步通信"></a>基于事件的异步通信</h3><p>基于事件的异步通信主要考虑两部分：微服务的发布事件机制和消费者接收事件机制。传统上来说，像RabbitMQ、zookeeper[14]这样的消息代理能够处理上述两个问题，生产者（producer）使用API向代理发布事件，代理也可以向消费者提供订阅服务，并在事件发生时通知消费者。这种代理甚至可以追踪消费者的状态，比如标记哪些消息是该消费者已经消费过的。这种系统常用具有较好的可伸缩性和弹性，但这么做也是有代价的，它会增加开发流程的复杂度，因为你需要一个额外的系统（消息代理）才能开发测试服务。开发人员也需要额外的机器和专业知识来保持这些基础设施的正常运行，一旦实施成功，它会是实现松耦合、事件驱动架构的一种有效方法。</p>
+<h3 id="API_Gateway"><a href="#API_Gateway" class="headerlink" title="API Gateway"></a>API Gateway</h3><p>考虑如下场景，一个使用微服务架构的应用既支持web网站又支持手机原生应用，各微服务通过API接口对上述两个客户端提供后台服务，展示手机上的一屏画面可能就需要调用多个后台微服务，因为移动设备通常带宽较低且流量资费高昂，这种频繁的调用会增加时延并影响用户体验。</p>
+<p>API<br>Gateway是进入系统的唯一节点，它封装内部系统的架构，并且提供API给各个客户端，它还可以提供譬如授权、监控、负载均衡、缓存、请求分片和管理、静态响应处理等。图2展示了使用API<br>Gateway后的架构。</p>
+<p><img src="http://7xr558.com1.z0.glb.clouddn.com/2.jpg" alt="图2"></p>
+<p>API Gateway的开源实现常见的有Netflix API Gateway和基于Nginx的Kong[15]。</p>
+<h2 id="u670D_u52A1_u53D1_u73B0"><a href="#u670D_u52A1_u53D1_u73B0" class="headerlink" title="服务发现"></a>服务发现</h2><p>当一个微服务需要调用另一个微服务时，如何定位其网络位置是一个关键问题。出于系统伸缩的需要，微服务会有很多实例，他们被部署在一台或者多台机器中，网络位置是动态的，因此需要一种服务发现机制。简单的服务发现方案是DNS，DNS让我们将一个名称与一个或多个机器IP地址相关联。DNS最主要的优点是简单易行、灵活方便，几乎所有的技术栈都支持，然而，尽管很多组件可以管理组织内的DNS，但其中很少是为处理这种高度可控制主机的场景而设计的，这使得更新DNS条目有些困难。所以现在更多使用的是动态服务注册。</p>
+<p>如图3所示，服务实例在启动时向服务注册中心注册自己，当服务实例失效时注册中心会自动注销该实例地址，客户请求时，先向服务注册中心查询，得到可用的服务实例地址后再进行访问。</p>
+<p><img src="http://7xr558.com1.z0.glb.clouddn.com/3.jpg" alt="图3"></p>
+<p>服务注册中心在整个去中心化的大趋势下貌似格格不入，但其实这是解决问题的最佳方法，但这时也需要考虑单点故障问题，当系统规模较大、要求较高时需要使用集群，目前已有满足这种需求的开源实现，如zookeeper、consul、etcd。</p>
+<h2 id="u670D_u52A1_u90E8_u7F72"><a href="#u670D_u52A1_u90E8_u7F72" class="headerlink" title="服务部署"></a>服务部署</h2><p>微服务的部署时另一个需要考虑的重要问题。主要由以下几种方法：A.<br>微服务实例都部署在一台或多台虚拟机或物理主机中，不需要特别的隔离办法，只要保证每个微服务都拥有不同的端口或者位置。譬如Java<br>Web应用可以让多个微服务的war文件都部署在同一个tomcat中。这种方法简单直接，共享系统资源，利用率最高，但缺点是没有服务间隔离，某个服务由于bug抢占系统资源可能造成所有服务不可用，另外一个缺点是需要根据微服务所使用的技术栈部署各种运行环境，延长了交付周期，没能实现持续交付。B.<br>让每个微服务实例运行在单独的虚拟机中，这种隔离方法最彻底，互相不受影响，并可以控制每台虚拟机使用资源的额度，对某个服务的扩展也变得简单，缺点是虚拟机本身消耗资源且启动缓慢。C.<br>随着轻量级容器技术的飞速发展，可以将每个微服务实例部署在docker等容器中，每台虚拟机可运行一个或多个容器实例。容器属于操作系统层面的虚拟化，提供了类似虚拟机的完全隔离环境，但却共享系统内核，占用资源少，启动速度快，而且随着系统的逐步变大，可以使用容器集群管理系统，譬如kubernetes[16]、docker<br>swarm、Mesos[17]等，他们兼具服务发现功能，大大减轻了服务部署和伸缩的难度。</p>
+<h1 id="u5FAE_u670D_u52A1_u7684_u5B9E_u9645_u5E94_u7528"><a href="#u5FAE_u670D_u52A1_u7684_u5B9E_u9645_u5E94_u7528" class="headerlink" title="微服务的实际应用"></a>微服务的实际应用</h1><p>数据工程项目的建设目的是根据试验通信信息服务的特点，研究数据应用在试验通信信息服务中应用的关键技术和难点，并以此研究数据应用技术的现状趋势，技术内容涵盖数据工程中数据采集、数据存储、数据处理、数据应用等各个环节，在确定技术体系的基础上，根据测通所提供的“通信词条”和“通信设备故障”数据资源，对数据应用技术软件原型体系架构、接口、数据库等进行详细设计，并完成软件原型。</p>
+<p>项目后端的总体框架如图4所示，该项目中采用了微服务架构，可以大体忽略具体业务逻辑，从架构设计来看：<br><img src="http://7xr558.com1.z0.glb.clouddn.com/4.jpg" alt="图4"></p>
+<ol>
+<li><p>最底层是docker容器，docker容器对主机的资源进行了充分隔离，而且使用mesos来管理docker实例。</p>
+</li>
+<li><p>基础服务层，可以随意分配给不同的人员来使用不同的技术栈进行开发，得益于docker容器层，基础服务启动时向注册中心zookeeper注册。</p>
+</li>
+<li><p>应用服务层，如果业务需要经典的MVC架构来实现，此时可以通过组合基础服务层来实现。</p>
+</li>
+<li><p>UI层，可以同时支持PC客户端和手机客户端，手机客户端通过API<br>Gateway来访问微服务。</p>
+</li>
+</ol>
+<h1 id="u7ED3_u8BBA"><a href="#u7ED3_u8BBA" class="headerlink" title="结论"></a>结论</h1><p>本文阐述了正在兴起的微服务架构的概念和原理。与传统单体式应用架构相比，微服务架构降低了系统耦合度，增强了系统持续交付能力，提高了系统的可扩展性。对微服务中的三个关键问题（通信问题、服务发现问题及服务部署问题）进行了较为详细的阐述，提出了各种场景下实现微服务架构的不同路径及其优劣，为微服务的系统设计提供了一些指引。最后结合今年部门的数据工程项目，从架构层面上阐述了微服务的思想。得益于微服务架构，该系统具有较强的可扩展性和容错能力，且同时支持WEB客户端和手机客户端，能为客户提供稳定优质的数据查询等服务。</p>
+<h1 id="u53C2_u8003_u6587_u732E"><a href="#u53C2_u8003_u6587_u732E" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1]Sam Newman.微服务设计[M].北京:人民邮电出版社,2016:2. </p>
+<p>[2] FOWLER M, LEWIS J. Microservices [J]. Viittattu, 2014, 28: 2015. </p>
+<p>[3] 李林锋.分布式服务框架原理与实践[M].北京:电子工业出版社,2016:23-24. </p>
+<p>[4] EINAS H. Service-oriented architecture: scaling the uber engineering<br>codebase as we grow [EB/OL].(2013-10-30) [2015-07-05].<br><a href="https://eng.uber.com/soa/" target="_blank" rel="external">https://eng.uber.com/soa/</a>.</p>
+<p>[5] wiki. esb[EB/OL]. <a href="https://en.wikipedia.org/wiki/Enterprise_service_bus" target="_blank" rel="external">https://en.wikipedia.org/wiki/Enterprise_service_bus</a>. </p>
+<p>[6] BASS L, WEBER I, ZHU Liming. DevOps: A software architect’s perspective [M].<br>Sydney: Addison-Wesley Professional, 2015.</p>
+<p>[7] stackoverflow. What is exactly RESRful programming[EB/OL].<br><a href="http://stackoverflow.com/questions/671118/what-exactly-is-restful-programming" target="_blank" rel="external">http://stackoverflow.com/questions/671118/what-exactly-is-restful-programming</a>.</p>
+<p>[8] alibaba. dubbo[EB/OL]. <a href="http://dubbo.io/" target="_blank" rel="external">http://dubbo.io/</a>.</p>
+<p>[9] weibocom. motan[EB/OL]. <a href="https://github.com/weibocom/motan" target="_blank" rel="external">https://github.com/weibocom/motan</a>.</p>
+<p>[10] SLEE M, AGARWAL A, KWIATKOWSKI M. Thrift: scalable cross-language services<br>implementation [R].[S.l]: Facebook White Paper, 2007.</p>
+<p>[11] Google. gRPC[EB/OL]. <a href="https://grpc.io/" target="_blank" rel="external">https://grpc.io/</a>.</p>
+<p>[12] rabbitMQ[EB/OL]. <a href="http://www.rabbitmq.com/" target="_blank" rel="external">http://www.rabbitmq.com/</a>.</p>
+<p>[13] Apache. kafka[EB/OL]. <a href="http://kafka.apache.org/" target="_blank" rel="external">http://kafka.apache.org/</a>.</p>
+<p>[14] Apache. zookeeper[EB/OL]. <a href="http://zookeeper.apache.org/" target="_blank" rel="external">http://zookeeper.apache.org/</a>.</p>
+<p>[15] Kong-API Gateway[EB/OL]. <a href="https://getkong.org/" target="_blank" rel="external">https://getkong.org/</a>.</p>
+<p>[16] Google. kubernetes[EB/OL]. <a href="https://kubernetes.io/" target="_blank" rel="external">https://kubernetes.io/</a>.</p>
+<p>[17] Apache. Mesos[EB/OL]. <a href="http://mesos.apache.org/" target="_blank" rel="external">http://mesos.apache.org/</a>.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://lq08025107.github.io/2017/08/02/微服务中若干关键问题的研究及应用/" data-id="cj5us15010009wsau7k1zyz9s" class="article-share-link" data-share="baidu" data-title="微服务中若干关键问题的研究及应用">分享到</a>
+      
+
+      
+        <a href="http://lq08025107.github.io/2017/08/02/微服务中若干关键问题的研究及应用/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微服务/">微服务</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/07/10/近期感想/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">近期感想</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+ 
+  <section id="comments">
+   <!-- 多说评论框 start -->
+<div id="ds-thread" class="ds-thread" data-thread-key="2017/08/02/微服务中若干关键问题的研究及应用/" data-title="微服务中若干关键问题的研究及应用" data-url="http://lq08025107.github.io/2017/08/02/微服务中若干关键问题的研究及应用/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"datoublog"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyDarwin/">EasyDarwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop-HDFS/">Hadoop HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/">REST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC-Java/">RPC Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service-Discovery/">Service Discovery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作模式/">工作模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务-docker/">微服务 docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活-学习/">生活 学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活-技术-总结/">生活 技术 总结</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/EasyDarwin/" style="font-size: 10px;">EasyDarwin</a> <a href="/tags/Hadoop-HDFS/" style="font-size: 10px;">Hadoop HDFS</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RPC-Java/" style="font-size: 10px;">RPC Java</a> <a href="/tags/Service-Discovery/" style="font-size: 10px;">Service Discovery</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/工作模式/" style="font-size: 10px;">工作模式</a> <a href="/tags/微服务/" style="font-size: 15px;">微服务</a> <a href="/tags/微服务-docker/" style="font-size: 10px;">微服务 docker</a> <a href="/tags/生活/" style="font-size: 20px;">生活</a> <a href="/tags/生活-学习/" style="font-size: 10px;">生活 学习</a> <a href="/tags/生活-技术-总结/" style="font-size: 10px;">生活 技术 总结</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/02/微服务中若干关键问题的研究及应用/">微服务中若干关键问题的研究及应用</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/10/近期感想/">近期感想</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/工作模式所感/">工作模式所感</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/10/BottomNavigation使用说明/">BottomNavigation使用说明</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/05/微服务杂谈与汇总/">微服务杂谈与汇总</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://weibo.com/u/1906711175" target="_blank">作者微博</a>
+          </li>
+        
+          <li>
+            <a href="http://iliuqiang.net" target="_blank">lq08025107@163.com</a>
+          </li>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus.</a>
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+    </div>
+  </div>
+
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"lq08025107"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="http://libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
